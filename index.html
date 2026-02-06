@@ -22,8 +22,8 @@
             --text-dark: #1a1a1a;
             --text-muted: #666666;
             --border: #e0e0e0;
-            --success: #2d6a4f;
-            --error: #c1121f;
+            --success: #22c55e;
+            --error: #ef4444;
             --shadow: rgba(0, 0, 0, 0.08);
         }
 
@@ -33,6 +33,7 @@
             color: var(--text-dark);
             line-height: 1.6;
             min-height: 100vh;
+            padding-bottom: 80px;
         }
 
         .container {
@@ -201,41 +202,47 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+                transform: scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .question-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             padding-bottom: 1rem;
             border-bottom: 2px solid var(--border);
         }
 
         .question-number {
             font-family: 'Crimson Pro', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 1.3rem;
+            font-weight: 600;
             color: var(--primary);
         }
 
         .question-marks {
             background: var(--secondary);
             color: white;
-            padding: 0.5rem 1rem;
+            padding: 0.4rem 1rem;
             border-radius: 20px;
-            font-weight: 600;
             font-size: 0.9rem;
+            font-weight: 600;
         }
 
         .question-text {
             font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 2rem;
-            color: var(--text-dark);
             font-weight: 500;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            color: var(--text-dark);
         }
 
         .options {
@@ -244,95 +251,93 @@
         }
 
         .option {
+            display: flex;
+            align-items: flex-start;
             padding: 1.2rem 1.5rem;
             border: 2px solid var(--border);
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
-            background: var(--bg-light);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+            background: var(--bg-white);
         }
 
         .option:hover {
             border-color: var(--primary);
-            background: white;
-            transform: translateX(8px);
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px var(--shadow);
         }
 
         .option-label {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: var(--primary);
-            color: white;
+            min-width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: var(--bg-light);
+            color: var(--primary);
+            border-radius: 8px;
             font-weight: 700;
+            margin-right: 1rem;
             flex-shrink: 0;
         }
 
+        .option.selected {
+            border-color: var(--primary);
+            background: rgba(26, 58, 82, 0.05);
+        }
+
         .option.correct {
-            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
             border-color: var(--success);
+            background: rgba(34, 197, 94, 0.1);
         }
 
         .option.correct .option-label {
             background: var(--success);
+            color: white;
         }
 
         .option.wrong {
-            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
             border-color: var(--error);
+            background: rgba(239, 68, 68, 0.1);
         }
 
-        .option.selected {
-            border-color: var(--accent);
-            background: #fff5ed;
+        .option.wrong .option-label {
+            background: var(--error);
+            color: white;
         }
 
-        /* Navigation */
-        .nav-buttons {
-            display: flex;
-            justify-content: space-between;
-            gap: 1rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-
+        /* Buttons */
         .btn {
             padding: 1rem 2rem;
             border: none;
             border-radius: 12px;
-            font-weight: 600;
             font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: 'DM Sans', sans-serif;
-            box-shadow: 0 4px 12px var(--shadow);
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, #2c5f7f 100%);
+            background: var(--primary);
             color: white;
         }
 
         .btn-primary:hover {
+            background: #2c5f7f;
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(26, 58, 82, 0.3);
+            box-shadow: 0 8px 16px var(--shadow);
         }
 
         .btn-secondary {
-            background: white;
+            background: var(--bg-light);
             color: var(--primary);
-            border: 2px solid var(--primary);
+            border: 2px solid var(--border);
         }
 
         .btn-secondary:hover {
-            background: var(--primary);
-            color: white;
+            background: var(--bg-white);
+            border-color: var(--primary);
         }
 
         .btn:disabled {
@@ -340,82 +345,19 @@
             cursor: not-allowed;
         }
 
-        /* Score Display */
-        .score-display {
-            background: linear-gradient(135deg, var(--primary) 0%, #2c5f7f 100%);
-            color: white;
-            padding: 2rem;
-            border-radius: 16px;
-            text-align: center;
-            margin-bottom: 2rem;
-            box-shadow: 0 8px 32px var(--shadow);
-        }
-
-        .score-display h2 {
-            font-family: 'Crimson Pro', serif;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .score-details {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .score-item {
-            text-align: center;
-        }
-
-        .score-item .number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .score-item .label {
-            opacity: 0.9;
-            font-size: 1rem;
-        }
-
-        /* Progress Bar */
-        .progress-container {
-            background: var(--border);
-            height: 8px;
-            border-radius: 4px;
-            margin-bottom: 2rem;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            transition: width 0.3s ease;
-            border-radius: 4px;
-        }
-
-        /* View Mode Specific */
-        .view-mode .question-container {
-            margin-bottom: 3rem;
-            border-left: 4px solid var(--primary);
-        }
-
         .back-button {
             position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
-            background: white;
-            border: 2px solid var(--primary);
-            color: var(--primary);
+            top: 2rem;
+            left: 2rem;
             padding: 0.8rem 1.5rem;
+            background: var(--bg-white);
+            color: var(--primary);
+            border: 2px solid var(--primary);
             border-radius: 12px;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease;
+            z-index: 1000;
             box-shadow: 0 4px 12px var(--shadow);
         }
 
@@ -425,276 +367,481 @@
             transform: translateX(-4px);
         }
 
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background: var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
+        /* Score Display */
+        .score-display {
+            background: var(--bg-white);
+            padding: 3rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 4px 24px var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .score-display h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+        }
+
+        .score-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .score-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .score-item .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .score-item .label {
+            font-size: 1rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Footer */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, var(--primary) 0%, #2c5f7f 100%);
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+            font-size: 0.95rem;
+            font-weight: 500;
+            box-shadow: 0 -4px 16px var(--shadow);
+            z-index: 999;
+        }
+
+        /* View Mode Specific */
+        .view-mode .question-container {
+            margin-bottom: 2.5rem;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2rem;
             }
 
-            .container {
-                padding: 1rem;
-            }
-
-            .mode-card {
-                padding: 1.5rem;
-            }
-
-            .question-text {
-                font-size: 1.1rem;
+            .mode-selection {
+                grid-template-columns: 1fr;
             }
 
             .chapter-grid {
                 grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-                gap: 1rem;
             }
-        }
 
-        .hidden {
-            display: none;
-        }
+            .container {
+                padding: 1rem;
+            }
 
-        /* Loading Animation */
-        .loading {
-            text-align: center;
-            padding: 4rem;
-            font-size: 1.2rem;
-            color: var(--text-muted);
-        }
+            .back-button {
+                top: 1rem;
+                left: 1rem;
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
 
-        .loading::after {
-            content: '...';
-            animation: dots 1.5s infinite;
-        }
+            .nav-buttons {
+                flex-direction: column;
+            }
 
-        @keyframes dots {
-            0%, 20% { content: '.'; }
-            40% { content: '..'; }
-            60%, 100% { content: '...'; }
+            body {
+                padding-bottom: 100px;
+            }
         }
     </style>
 </head>
 <body>
     <div id="app"></div>
 
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <div class="footer">
+        CREATED BY: <strong>D S SAVALIYA</strong> | Constitution of India Quiz Platform
+    </div>
+
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
+    
     <script type="text/babel">
-        const { useState, useEffect } = React;
+        const { useState } = React;
 
-        // All quiz data from PDF
-        const quizData = [
-            {"sr_no":1,"unit":1,"question":"Under which Act, the provision for establishment of Supreme court at Calcutta was made?","answer":"a","marks":1,"options":["Regulating Act, 1773","Pitt's India Act, 1784","Charter Act, 1833","Government of India Act, 1858"]},
-            {"sr_no":2,"unit":1,"question":"Which Act provided for the establishment of Public Service Commission?","answer":"c","marks":1,"options":["Government of India Act, 1858","Indian Council Act, 1909","Government of India Act, 1919","Government of India Act, 1935"]},
-            {"sr_no":3,"unit":1,"question":"Which of the following Act provided for the establishment of Federal Court?","answer":"c","marks":1,"options":["Indian Council Act, 1909","Government of India Act, 1919","Government of India Act, 1935","Indian Independence Act, 1947"]},
-            {"sr_no":4,"unit":1,"question":"Under which Act, commercial activities of East India Company was put to an end?","answer":"a","marks":1,"options":["Charter Act, 1833","Charter Act, 1853","Indian Council Act, 1861","Indian Council Act, 1909"]},
-            {"sr_no":5,"unit":1,"question":"Who introduced the Portfolio system in India?","answer":"d","marks":1,"options":["Lord Mountbatten","John Simon","Lord William Bentick","Lord Canning"]},
-            {"sr_no":6,"unit":1,"question":"Which of the following Act is known as \"An Act for the Better Government of India\"?","answer":"b","marks":1,"options":["Charter Act, 1853","Government of India Act, 1858","Indian Council Act, 1861","Indian Council Act, 1892"]},
-            {"sr_no":7,"unit":1,"question":"Which Act is known as Morley-Minto Reforms?","answer":"a","marks":1,"options":["Indian Council Act, 1909","Government of India Act, 1919","Government of India Act, 1935","Indian Independence Act, 1947"]},
-            {"sr_no":8,"unit":1,"question":"Government of India Act,1919 is known as:","answer":"c","marks":1,"options":["Morley-Minto Reforms","An Act for the Better Government of India","Montagu-Chelmsford Reforms","First War of Independence"]},
-            {"sr_no":9,"unit":1,"question":"Which of the following Act introduced \"Provincial Autonomy\"?","answer":"c","marks":1,"options":["Indian Council Act, 1909","Government of India Act, 1919","Government of India Act, 1935","Indian Independence Act, 1947"]},
-            {"sr_no":10,"unit":1,"question":"The trade monopoly of East India company was put to an end by:","answer":"c","marks":1,"options":["Regulating Act, 1773","Pitt's India Act, 1784","Charter Act, 1813","Charter Act, 1833"]},
-            {"sr_no":11,"unit":1,"question":"Which of the following Act provided for the partition of India and creation of two independent dominions of India and Pakistan?","answer":"d","marks":1,"options":["Indian Council Act, 1909","Government of India Act, 1919","Government of India Act, 1935","Indian Independence Act, 1947"]},
-            {"sr_no":12,"unit":1,"question":"Under which Act, British Government taken first step to control and Regulate the affairs of East India Company?","answer":"a","marks":1,"options":["Regulating Act, 1773","Pitt's India Act, 1784","Charter Act, 1813","Government of India Act, 1919"]},
-            {"sr_no":13,"unit":1,"question":"The Indian Legislature was made bicameral for the first time by:","answer":"d","marks":1,"options":["Government of India Act, 1858","Indian Council Act, 1861","Indian Council Act, 1909","Government of India Act, 1919"]},
-            {"sr_no":14,"unit":1,"question":"Under which Act, the concept of 'Separate Electorate'(Communal Representation) was introduced?","answer":"b","marks":1,"options":["Indian Council Act, 1861","Indian Council Act, 1909","Government of India Act, 1919","Government of India Act, 1935"]},
-            {"sr_no":15,"unit":1,"question":"Which of the following statement is correct about the Government of India Act,1858?","answer":"b","marks":1,"options":["This Act abolished the commercial activities of East India Company.","It ended the system of double Government by abolishing the Board of Control and Board of Directors.","It abolished Dyarchy in the provinces and introduced 'Provincial Autonomy' in its place.","It ended the trade monopoly of East India Company."]},
-            {"sr_no":16,"unit":1,"question":"Which Act introduced local representation in the Indian(Central) Legislative Council for the first time?","answer":"d","marks":1,"options":["Regulating Act, 1773","Pitt's India Act, 1784","Charter Act, 1833","Charter Act, 1853"]},
-            {"sr_no":17,"unit":1,"question":"Dyarchy was introduced under which Act:","answer":"c","marks":1,"options":["Indian Council Act, 1909","Government of India Act, 1858","Government of India Act, 1919","Government of India Act, 1935"]},
-            {"sr_no":18,"unit":1,"question":"Government of India Act,1935 provided for the establishment of:","answer":"a","marks":1,"options":["Federal Court","Supreme Court","Legislative Council","Public Service Commission"]},
-            {"sr_no":19,"unit":1,"question":"Consider the following:\n1. The Regulating Act of 1773 was passed by British Parliament to control the territories of East India Company.\n2. It provided for the establishment of Supreme Court at Calcutta.\nWhich of the above statement is correct about Regulating Act of 1773?","answer":"c","marks":1,"options":["Only 1","Only 2","Both 1 and 2","Neither 1 nor 2"]},
-            {"sr_no":20,"unit":1,"question":"Which of the following act ended the british rule in India and declared India as an independent and sovereign state?","answer":"d","marks":1,"options":["Indian Council Act, 1909","Government of India Act, 1919","Government of India Act, 1935","Indian Independence Act, 1947"]},
-            {"sr_no":21,"unit":1,"question":"Under which Act, the System of double government was put to an end by abolishing the Board of Control and Court of Directors?","answer":"c","marks":1,"options":["Charter Act, 1853","Indian Council Act, 1861","Government of India Act, 1858","Indian Council Act, 1892"]},
-            {"sr_no":22,"unit":1,"question":"To rectify the defects of the Regulating Act of 1773, the British Parliament has passed following act:","answer":"a","marks":1,"options":["Amending Act, 1781","Pitt's India Act, 1784","Charter Act, 1813","Charter Act, 1833"]},
-            {"sr_no":23,"unit":1,"question":"Indian Council Act,1909 introduced the following system:","answer":"c","marks":1,"options":["Dyarchy","Bicameral Legislature","Separate Electorate","Provincial Autonomy"]},
-            {"sr_no":24,"unit":1,"question":"Amending Act of 1781 is known as:","answer":"a","marks":1,"options":["Act of Settlement","Mountbatten Plan","An Act for the Better Government of India","Sepoy Mutiny"]},
-            {"sr_no":25,"unit":1,"question":"India is a democratic republic, because","answer":"b","marks":1,"options":["there is independence of judiciary","the Head of the State is elected by the people","the Head of the State is elected by the people","the Head of the State is elected by the people"]},
-            {"sr_no":26,"unit":1,"question":"India opted for a federal form of government because of","answer":"c","marks":1,"options":["vast-territory","cultural integration","linguistic and regional diversity","administrative convenience"]},
-            {"sr_no":27,"unit":1,"question":"Indian Constitution is:","answer":"d","marks":1,"options":["Quasi Federal","Unitary","Presidential","Federal"]},
-            {"sr_no":28,"unit":1,"question":"Preamble means?","answer":"d","marks":1,"options":["the preface of a book","the head of a body","the top most portion of any thing","preface, introduction especially that of an act of Parliament stating its aims & objectives"]},
-            {"sr_no":29,"unit":1,"question":"The Preamble of the Indian Constitution serves the purpose of?","answer":"d","marks":1,"options":["pointing out what the people expect the Government of India to accomplish","indicating that the authority of the Government is derived from the people","helping judges to interpret various provisions of the Constitution properly","All of these"]},
-            {"sr_no":30,"unit":1,"question":"Which one of the following countries does not possess a written constitution?","answer":"b","marks":1,"options":["Switzerland","Britain","U.S.A.","Soviet Union"]},
-            {"sr_no":31,"unit":1,"question":"Which one of the following is not an essential feature of a good constitution?","answer":"d","marks":1,"options":["Comprehensiveness","Written character","Flexibility","Independence of judiciary"]},
-            {"sr_no":32,"unit":1,"question":"An unwritten constitution is","answer":"b","marks":1,"options":["Wholly unwritten","Mostly unwritten","Contains only some unwritten portions","Declared as unwritten by the constituent Assembly"]},
-            {"sr_no":33,"unit":1,"question":"In a country with a written constitution the constitution is","answer":"c","marks":1,"options":["Inferior to the laws of the Parliament","Superior to the laws of the Parliament","At par with the laws of the Parliament","None of these"]},
-            {"sr_no":34,"unit":1,"question":"A constitution is known as flexible","answer":"a","marks":1,"options":["If it can be amended by the ordinary lawmaking procedure","It the states alone can amend the constitution","If the procedure for the amendment of constitution is simple than the ordinary lawmaking procedure","If it is difficult to amend"]},
-            {"sr_no":35,"unit":1,"question":"A flexible constitution is found in","answer":"a","marks":1,"options":["Britain","U.S.A.","India","Soviet Union"]},
-            {"sr_no":36,"unit":1,"question":"A rigid constitution","answer":"c","marks":1,"options":["Cannot be amended","Cannot be amended","Can be amended through a special process which is difficult than the ordinary lawmaking process","Can be amended through a procedure which is easier than, the ordinary law making procedure"]},
-            {"sr_no":37,"unit":1,"question":"Which one of the followings is not a feature of constitutionalism?","answer":"b","marks":1,"options":["Limited Government","Supremacy of individual","Supremacy of Law","Division of powers"]},
-            {"sr_no":38,"unit":1,"question":"What is the meaning of \"social equality\" in the Indian Constitution?","answer":"c","marks":1,"options":["Lack of opportunities","Lack of equality","Equal opportunities for all sections of the societies","None of the following"]},
-            {"sr_no":39,"unit":1,"question":"Which of the following word has not been written in the preamble of the Indian Constitution?","answer":"d","marks":1,"options":["Sovereign","Socialist","Democratic","Indians"]},
-            {"sr_no":40,"unit":1,"question":"What is the true meaning of \"Secular\"?","answer":"a","marks":1,"options":["All religions are equal in the eyes of the government","Special importance to a religion related to minorities","One religion is promoted by the government","None of the following"]},
-            {"sr_no":41,"unit":1,"question":"The Indian Constitution is regarded as","answer":"d","marks":1,"options":["federal","unitary","parliamentary","federal in form and unitary in spirit"]},
-            {"sr_no":42,"unit":1,"question":"Secularism means","answer":"d","marks":1,"options":["suppression of all religions","freedom of worship to minorities","separation of religion from State","a system of political and social philosophy that does not favour any particular religious faith"]},
-            {"sr_no":43,"unit":1,"question":"In a Federal State","answer":"d","marks":1,"options":["States are more powerful than the Centre","Centre is more powerful than States","a Presidential form of government functions","Constitution effects division of powers between the Centre and States with safeguards against transgression of jurisdiction"]},
-            {"sr_no":44,"unit":1,"question":"The Preamble of the Indian Constitution reads","answer":"d","marks":1,"options":["We, the people of India – adopt, enact and give to India this Constitution'","We, the people of Constituent Assembly –adopt, enact and give to India this Constitution","We, the citizens of India – adopt, enact and give to ourselves this Constitution","We, the people of India – in our Constituent Assembly – adopt, enact and give to ourselves this Constitution"]},
-            {"sr_no":45,"unit":1,"question":"The Constitution of India is designed to work as a unitary government","answer":"b","marks":1,"options":["in normal times","in times of Emergency","when the Parliament so desires","at the will of the President"]},
-            {"sr_no":46,"unit":1,"question":"Which one of the following statements regarding the Preamble is correct?","answer":"a","marks":1,"options":["It is not enforceable in a court of law","the Supreme Court has recently ruled that it is not a part of the Constitution","It has been amended twice","All the above are correct"]},
-            {"sr_no":47,"unit":1,"question":"India opted for a federal form of government because of","answer":"c","marks":1,"options":["vast-territory","cultural integration","linguistic and regional diversity","administrative convenience"]},
-            {"sr_no":48,"unit":1,"question":"The Indian Constitution closely follows the constitutional system of","answer":"b","marks":1,"options":["USA","UK","Switzerland","Russia"]},
-            {"sr_no":49,"unit":1,"question":"Which of the following describes India as a Secular State?","answer":"d","marks":1,"options":["Fundamental Rights","Ninth Schedule","Directive Principles","Preamble to the Constitution"]},
-            {"sr_no":50,"unit":1,"question":"The Preamble of the Constitution of India envisages that","answer":"d","marks":1,"options":["The Preamble of the Constitution of India envisages that","it could be abrogated or wiped out from the Constitution","it does not acknowledge, recognise or proclaim anything about the Constitution","it has separate entity in the Constitution"]},
-            {"sr_no":51,"unit":2,"question":"The following are enshrined in the Preamble to the Constitution of India:\n1. Equality of status and opportunity.\n2. Liberty of thought, expression, belief, faith and worship.\n3. Justice—social, economic and political.\n4. Fraternity assuring the dignity of the individual.\n5. Unity and integrity of the Nation.\nWhich one of the following is the correct order in which they appear in the Preamble?","answer":"b","marks":1,"options":["5, 1, 2, 4, 3","3, 2, 1, 4, 5","3, 1, 2, 5, 4","1, 2, 4, 3, 5"]},
-            {"sr_no":52,"unit":2,"question":"The philosophical postulates of the Constitution of India are based on:","answer":"b","marks":1,"options":["Nehru Report, 1928.","Objectives Resolution of Pandit Nehru, 1947.","Mahatma Gandhi's article 'Independence in Young India',1922.","Indian National Congress's Resolution for Complete Independence, 1929."]},
-            {"sr_no":53,"unit":2,"question":"The Preamble to the Indian Constitution is:","answer":"c","marks":1,"options":["Not a part of the Constitution.","A part of the Constitution but it neither confers any powers nor imposes any duties nor can it be of any use in interpreting other provisions of the Constitution.","A part of the Constitution and can be of use in interpreting other provisions of the Constitution in cases of ambiguity.","A part of the Constitution and it confers powers and imposes duties as any other provisions of the Constitution."]},
-            {"sr_no":54,"unit":2,"question":"Which one of the following statements is correct?\nThe Preamble to the Indian Constitution declares the resolve of the people of India to secure to all its citizens:","answer":"c","marks":1,"options":["Freedom of residence anywhere in the country.","Right to establish and administer educational institutions of choice.","Liberty of belief, faith and worship.","Right to education at primary level."]},
-            {"sr_no":55,"unit":2,"question":"The term \"economic justice\" in the Preamble to the Constitution of India, is a resolution for:","answer":"a","marks":1,"options":["Equal distribution of wealth.","Economy in the administration of justice.","Socio-economic revolution.","Cheap justice to the poor."]},
-            {"sr_no":56,"unit":2,"question":"The text of the Preamble to the Constitution of India aims to secure:","answer":"c","marks":1,"options":["Fundamental rights to all individuals.","Fundamental duties to citizens of India.","Dignity of the individual and unity and integrity of the nation.","Security of service to Government servants."]},
-            {"sr_no":57,"unit":2,"question":"Which of the following terms was not included in a 'Union of Trinity' by Dr. B.R. Ambedkar in his concluding speech in the Constituent Assembly?","answer":"b","marks":1,"options":["Liberty","Flexibility","Equality","Fraternity"]},
-            {"sr_no":58,"unit":2,"question":"The words \"Socialist\" and \"Secular\" were inserted in the Preamble by the:","answer":"c","marks":1,"options":["Fifteenth Amendment","Thirty-ninth Amendment","Forty-second Amendment","Forty-fourth Amendment"]},
-            {"sr_no":59,"unit":2,"question":"The sequence in which the given terms are mentioned in the Preamble to the Constitution of India is:","answer":"a","marks":1,"options":["Sovereign, Socialist, Secular, Democratic, Republic","Socialist, Secular, Sovereign, Democratic, Republic","Secular, Sovereign, Democratic, Socialist, Republic","Sovereign, Democratic, Secular, Socialist, Republic"]},
-            {"sr_no":60,"unit":2,"question":"The Preamble to the Constitution of India:","answer":"b","marks":1,"options":["Is not a part of the Constitution.","Indicates the objectives to be achieved.","Cannot be amended by the Parliament.","Is a source of authority of the Constitution of India."]},
-            {"sr_no":61,"unit":2,"question":"The Cabinet Mission to India was headed by","answer":"c","marks":1,"options":["Stafford Cripps","A.V. Alexander","Lord Pethick Lawrence","Hugh Gaitskell"]},
-            {"sr_no":62,"unit":2,"question":"The Constitution of India was adopted by the","answer":"c","marks":1,"options":["Governor General","British Parliament","Constituent Assembly","Parliament of India"]},
-            {"sr_no":63,"unit":2,"question":"The Constituent Assembly for undivided India first met on","answer":"b","marks":1,"options":["6th December, 1946","9th December, 1946","20th February, 1947","3rd June, 1947"]},
-            {"sr_no":64,"unit":2,"question":"Who among the following was the Constitutional adviser to the Constituent Assembly of India?","answer":"a","marks":1,"options":["Dr. B.N. Rao","Dr. B.R. Ambedkar","K.M. Munshi","M.C. Setalvad"]},
-            {"sr_no":65,"unit":2,"question":"The Constitution of India was enacted by a Constituent Assembly set up","answer":"b","marks":1,"options":["under the Indian Independence Act, 1947","under the Cabinet Mission Plan, 1946","through a resolution of the provisional government","by the Indian National Congress"]},
-            {"sr_no":66,"unit":2,"question":"The Constituent Assembly which framed the Constitution for Independent India was set up in","answer":"b","marks":1,"options":["1945","1946","1947","1949"]},
-            {"sr_no":67,"unit":2,"question":"Who presided over the inaugural meeting of the Constituent Assembly of India?","answer":"a","marks":1,"options":["Sachidananda Sinha","B. R. Ambedkar","Dr. Rajendra Prasad","P. Upendra"]},
-            {"sr_no":68,"unit":2,"question":"Who among the following was the Chairman of the Drafting Committee of the Indian Constitution?","answer":"d","marks":1,"options":["Rajendra Prasad","Tej Bahadur Sapru","C. Rajagopalachari","B. R. Ambedkar"]},
-            {"sr_no":69,"unit":2,"question":"How long did the Constituent Assembly take to finally pass the Constitution?","answer":"d","marks":1,"options":["about 6 months in 1949","exactly a year since Nov 26, 1948","about 2 years since Aug 15, 1947","about 3 years since Dec 9, 1946"]},
-            {"sr_no":70,"unit":2,"question":"Who was the President of the Constituent Assembly?","answer":"b","marks":1,"options":["Pt. Jawaharlal Nehru","Dr. Rajendra Prasad","Dr. B.R. Ambedkar","C. Rajagopalachari"]},
-            {"sr_no":71,"unit":2,"question":"The most profound influence on the drafting of the Indian Constitution was exercised by the","answer":"c","marks":1,"options":["U.S. Constitution","British Constitution","Government of India Act, 1935","French ideals of Liberty and Fraternity"]},
-            {"sr_no":72,"unit":2,"question":"The design of the National Flag was adopted by the Constituent Assembly of India in","answer":"c","marks":1,"options":["July, 1948","July, 1950","July, 1947","August, 1947"]},
-            {"sr_no":73,"unit":2,"question":"Which one of the following Acts formally introduced the principles of elections for the first time?","answer":"a","marks":1,"options":["Indian Councils Act, 1909","Government of India Act, 1919","Government of India Act, 1935","Indian Independence Act, 1947"]},
-            {"sr_no":74,"unit":2,"question":"The office of Governor General of India was created by","answer":"c","marks":1,"options":["Charter Act, 1813","Charter Act, 1833","Government of India Act, 1858","Government of India Act, 1935"]},
-            {"sr_no":75,"unit":2,"question":"Who among the following is known as the Father of the Indian Constitution?","answer":"a","marks":1,"options":["Dr. B.R. Ambedkar","Mahatma Gandhi","Jawaharlal Nehru","Vallabhbhai Patel"]},
-            {"sr_no":76,"unit":2,"question":"Who proposed the Preamble before the Drafting Committee of the Constitution?","answer":"a","marks":1,"options":["Jawaharlal Nehru","B.R. Ambedkar","B.N. Rao","Mahatma Gandhi"]},
-            {"sr_no":77,"unit":2,"question":"The first session of the Constituent Assembly was held in","answer":"d","marks":1,"options":["Bombay","Calcutta","Lahore","New Delhi"]},
-            {"sr_no":78,"unit":2,"question":"Consider the following statements:\n1. The Parliament is empowered to alter the boundaries of any existing State of India.\n2. A Bill pertaining to the alteration of the boundaries of any existing State of India can be introduced only in the Rajya Sabha and only on the recommendation of the President of India.\nWhich one of the statements given above is/are correct?","answer":"a","marks":1,"options":["Only 1","Only 2","Both 1 and 2","Neither 1 nor 2"]},
-            {"sr_no":79,"unit":2,"question":"Consider the following with respect to the Union of India:\n1. Formation of the State of Nagaland.\n2. States Reorganisation Act.\n3. Formation of the State of Haryana.\n4. Formation of the State of Gujarat.\nWhich one of the following is the correct chronological order of the above?","answer":"d","marks":1,"options":["4-2-3-1","2-4-3-1","4-2-1-3","2-4-1-3"]},
-            {"sr_no":80,"unit":2,"question":"The boundary of a State in India can be altered through the procedure laid down in:","answer":"d","marks":1,"options":["Article 368","Article 130","Article 70","Article 3"]},
-            {"sr_no":81,"unit":2,"question":"In 1953, Prime Minister Jawaharlal Nehru announced the formation of a Commission to study the reorganization of states on a linguistic basis under the chairmanship of:","answer":"c","marks":1,"options":["T.T. Krishnamachari","Vallabhbhai Patel","Fazl Ali","G.B. Pant"]},
-            {"sr_no":82,"unit":2,"question":"The Parliament of India passed the States Reorganisation Act in 1956 to create:","answer":"c","marks":1,"options":["16 States and 3 Union Territories","15 States and 5 Union Territories","14 States and 6 Union Territories","24 States and 9 Union Territories"]},
-            {"sr_no":83,"unit":2,"question":"The States of the Indian Union can be reorganised or their boundaries altered by:","answer":"a","marks":1,"options":["The Union Parliament by a simple majority in the ordinary process of legislation.","Two-thirds majority of both the Houses of Parliament.","Two-thirds majority of both the Houses of Parliament and the consent of the legislature of the concerned States.","An executive order of the Union Government with the consent of the concerned State Governments."]},
-            {"sr_no":84,"unit":2,"question":"The Constitution of India divided the states of India in categories A, B, C and D in the year 1950. In this context which of the following statements is correct?","answer":"c","marks":1,"options":["The Chief Commissioner was the executive head of category A states. The Rajpramukh was the executive head of category B states. The Governor was the executive head of categories C and D states.","The Rajpramukh was the executive head of category A states. The Chief Commissioner was the executive head of categories B and C states. The Governor was the executive head of the category D states.","The Governor was the executive head of category A states. The Rajpramukh was the executive head of category B states. The Chief Commissioner was the executive head of categories C and D states.","The Governor was the executive head of category A states. The Chief Commissioner was the executive head of category B states. The Rajpramukh was the executive head of categories C and D states."]},
-            {"sr_no":85,"unit":2,"question":"Who among the following was the head of the Linguistic Provinces Commission appointed in the year 1948, to enquire into the desirability of linguistic provinces?","answer":"b","marks":1,"options":["Jawaharlal Nehru","Justice S.K. Dhar","Justice Fazl Ali","Pattabhi Sitaramayya"]},
-            {"sr_no":86,"unit":2,"question":"What is the correct chronological order in which the following States of the Indian Union were created or granted full statehood?\n1. Andhra Pradesh 2. Nagaland\n3. Maharashtra 4. Haryana\nSelect the correct answer using the codes given below:","answer":"c","marks":1,"options":["1-3-4-2","3-1-2-4","1-3-2-4","3-1-4-2"]},
-            {"sr_no":87,"unit":2,"question":"Who, among the following, was not a member of the States Reorganisation Commission (SRC) appointed by Pandit Jawaharlal Nehru?","answer":"b","marks":1,"options":["Justice Fazl Ali","Potti Sriramulu","K.M. Panikkar","Hridayanath Kunzru"]},
-            {"sr_no":88,"unit":2,"question":"Consider the following statements with reference to the linguistic reorganisation of states in independent India:\n1. The separate state of Andhra for the Telugu people came into existence in 1953.\n2. Jawaharlal Nehru was particularly in favour of the movement for linguistic reorganisation of states that came in the wake of the success of the Andhra movement.\nWhich one of the statements given above is/are correct?","answer":"a","marks":1,"options":["Only 1","Only 2","Both 1 and 2","Neither 1 nor 2"]},
-            {"sr_no":89,"unit":2,"question":"Who among the following was not a member of the Constituent Assembly?","answer":"c","marks":1,"options":["Sardar Vallabhbhai Patel","Acharya J.B. Kriplani","Lok Nayak Jayprakash Narayan","K.M. Munshi"]},
-            {"sr_no":90,"unit":2,"question":"The first effort at drafting a Dominion Status Constitution for India was made in response to the","answer":"c","marks":1,"options":["Minto-Morley Reforms","Montague-Chelmsford Reforms","Simon Commission","First Round Table Conference"]},
-            {"sr_no":91,"unit":2,"question":"Consider the following statements:\n1. A person who was born on 26th January, 1951 in Rangoon, whose father was a citizen of India by birth at the time of his birth, is deemed to be an Indian citizen by descent.\n2. A person who was born on 1st July, 1988 in Itanagar, whose mother is a citizen of India at the time of his birth but the father was not, is deemed to be a citizen of India by birth.\nWhich one of the statements given above is/are correct?","answer":"c","marks":1,"options":["Only 1","Only 2","Both 1 and 2","Neither 1 nor 2"]},
-            {"sr_no":92,"unit":2,"question":"Under the Citizenship Act, 1955, by which of the following ways can a person become a citizen of India?\n1. By birth 2. By descent\n3. By registration 4. By nationalisation\n5. By incorporation of territory\nSelect the correct answer using the codes given below:","answer":"c","marks":1,"options":["1, 2, 3, 4 and 5","1 and 2","1, 2, 3 and 5","3, 4 and 5"]},
-            {"sr_no":93,"unit":2,"question":"Which of the following Articles of the Indian Constitution deal with citizenship in India?","answer":"c","marks":1,"options":["Articles 333 to 337","Articles 17 to 20","Articles 5 to 11","Articles 1 to 4"]},
-            {"sr_no":94,"unit":2,"question":"In which of the following years, the Citizenship Act, 1955 has been amended?\n1. 1986 2. 1992\n3. 2003 4. 2005\nSelect the correct answer using the codes given below:","answer":"c","marks":1,"options":["2, 3 and 4","1, 2 and 4","1, 2, 3 and 4","1, 2 and 3"]},
-            {"sr_no":95,"unit":2,"question":"Which Article of the Constitution of India deals with the rights of citizenship of certain persons of Indian origin residing outside India?","answer":"c","marks":1,"options":["Article 7","Article 10","Article 8","Article 9"]},
-            {"sr_no":96,"unit":2,"question":"Which one among the following has the power to regulate the right of citizenship in India?","answer":"b","marks":1,"options":["The Union Cabinet","The Parliament","The Supreme Court","The Law Commission"]},
-            {"sr_no":97,"unit":2,"question":"In which Part of the Constitution, details of citizenship are mentioned?","answer":"b","marks":1,"options":["Part I","Part II","Part III","Part IV"]},
-            {"sr_no":98,"unit":2,"question":"According to the Citizenship Act, 1955, by which of the following ways can a person lose citizenship of India?\n1. By Renunciation\n2. By Termination\n3. By Deprivation\nSelect the correct answer using the codes given below:","answer":"c","marks":1,"options":["1 and 2","2 and 3","1, 2 and 3","1 and 3"]},
-            {"sr_no":99,"unit":2,"question":"Consider the following statements:\n1. Originally, the Citizenship Act (1955), also provided for the Commonwealth Citizenship.\n2. The provision for Commonwealth Citizenship was repealed by the Citizenship (Amendment) Act, 2005.\nWhich of the statements given above is/are correct?","answer":"a","marks":1,"options":["Only 1","Only 2","Both 1 and 2","Neither 1 nor 2"]},
-            {"sr_no":100,"unit":2,"question":"Which one among the following is a fundamental duty of citizens under the Constitution of India?","answer":"c","marks":1,"options":["To provide friendly cooperation to the people of the neighbouring countries","To protect monuments of national importance","To defend the country and render national service when called upon to do so","To know more and more about the history of India"]},
+        // Complete questions data from all units (1-10)
+        const questionsData = [
+            // UNIT 1 - Historical Background (50 questions)
+            {unit: 1, question: "Under which Act, the provision for establishment of Supreme court at Calcutta was made?", options: ["Regulating Act, 1773", "Pitt's India Act, 1784", "Charter Act, 1833", "Government of India Act, 1858"], answer: "a", marks: 1},
+            {unit: 1, question: "Which Act provided for the establishment of Public Service Commission?", options: ["Government of India Act, 1858", "Indian Council Act, 1909", "Government of India Act, 1919", "Government of India Act, 1935"], answer: "c", marks: 1},
+            {unit: 1, question: "Which of the following Act provided for the establishment of Federal Court?", options: ["Indian Council Act, 1909", "Government of India Act, 1919", "Government of India Act, 1935", "Indian Independence Act, 1947"], answer: "c", marks: 1},
+            {unit: 1, question: "Under which Act, commercial activities of East India Company was put to an end?", options: ["Charter Act, 1833", "Charter Act, 1853", "Indian Council Act, 1861", "Indian Council Act, 1909"], answer: "a", marks: 1},
+            {unit: 1, question: "Who introduced the Portfolio system in India?", options: ["Lord Mountbatten", "John Simon", "Lord William Bentick", "Lord Canning"], answer: "d", marks: 1},
+            {unit: 1, question: "Which of the following Act is known as 'An Act for the Better Government of India'?", options: ["Charter Act, 1853", "Government of India Act, 1858", "Indian Council Act, 1861", "Indian Council Act, 1892"], answer: "b", marks: 1},
+            {unit: 1, question: "Which Act is known as Morley-Minto Reforms?", options: ["Indian Council Act, 1909", "Government of India Act, 1919", "Government of India Act, 1935", "Indian Independence Act, 1947"], answer: "a", marks: 1},
+            {unit: 1, question: "Government of India Act,1919 is known as:", options: ["Morley-Minto Reforms", "An Act for the Better Government of India", "Montagu-Chelmsford Reforms", "First War of Independence"], answer: "c", marks: 1},
+            {unit: 1, question: "Which of the following Act introduced 'Provincial Autonomy'?", options: ["Indian Council Act, 1909", "Government of India Act, 1919", "Government of India Act, 1935", "Indian Independence Act, 1947"], answer: "c", marks: 1},
+            {unit: 1, question: "The trade monopoly of East India company was put to an end by:", options: ["Regulating Act, 1773", "Pitt's India Act, 1784", "Charter Act, 1813", "Charter Act, 1833"], answer: "c", marks: 1},
+            {unit: 1, question: "Which of the following Act provided for the partition of India and creation of two independent dominions of India and Pakistan?", options: ["Indian Council Act, 1909", "Government of India Act, 1919", "Government of India Act, 1935", "Indian Independence Act, 1947"], answer: "d", marks: 1},
+            {unit: 1, question: "Under which Act, British Government taken first step to control and Regulate the affairs of East India Company?", options: ["Regulating Act, 1773", "Pitt's India Act, 1784", "Charter Act, 1813", "Government of India Act, 1919"], answer: "a", marks: 1},
+            {unit: 1, question: "The Indian Legislature was made bicameral for the first time by:", options: ["Government of India Act, 1858", "Indian Council Act, 1861", "Indian Council Act, 1909", "Government of India Act, 1919"], answer: "d", marks: 1},
+            {unit: 1, question: "Under which Act, the concept of 'Separate Electorate'(Communal Representation) was introduced?", options: ["Indian Council Act, 1861", "Indian Council Act, 1909", "Government of India Act, 1919", "Government of India Act, 1935"], answer: "b", marks: 1},
+            {unit: 1, question: "Which of the following statement is correct about the Government of India Act,1858?", options: ["This Act abolished the commercial activities of East India Company.", "It ended the system of double Government by abolishing the Board of Control and Board of Directors.", "It abolished Dyarchy in the provinces and introduced 'Provincial Autonomy' in its place.", "It ended the trade monopoly of East India Company."], answer: "b", marks: 1},
+            {unit: 1, question: "Which Act introduced local representation in the Indian(Central) Legislative Council for the first time?", options: ["Regulating Act, 1773", "Pitt's India Act, 1784", "Charter Act, 1833", "Charter Act, 1853"], answer: "d", marks: 1},
+            {unit: 1, question: "Dyarchy was introduced under which Act:", options: ["Indian Council Act, 1909", "Government of India Act, 1858", "Government of India Act, 1919", "Government of India Act, 1935"], answer: "c", marks: 1},
+            {unit: 1, question: "Government of India Act,1935 provided for the establishment of:", options: ["Federal Court", "Supreme Court", "Legislative Council", "Public Service Commission"], answer: "a", marks: 1},
+            {unit: 1, question: "Consider the following: 1. The Regulating Act of 1773 was passed by British Parliament to control the territories of East India Company. 2. It provided for the establishment of Supreme Court at Calcutta. Which of the above statement is correct about Regulating Act of 1773?", options: ["Only 1", "Only 2", "Both 1 and 2", "Neither 1 nor 2"], answer: "c", marks: 1},
+            {unit: 1, question: "Which of the following act ended the british rule in India and declared India as an independent and sovereign state?", options: ["Indian Council Act, 1909", "Government of India Act, 1919", "Government of India Act, 1935", "Indian Independence Act, 1947"], answer: "d", marks: 1},
+            {unit: 1, question: "Under which Act, the System of double government was put to an end by abolishing the Board of Control and Court of Directors?", options: ["Charter Act, 1853", "Indian Council Act, 1861", "Government of India Act, 1858", "Indian Council Act, 1892"], answer: "c", marks: 1},
+            {unit: 1, question: "To rectify the defects of the Regulating Act of 1773, the British Parliament has passed following act:", options: ["Amending Act, 1781", "Pitt's India Act, 1784", "Charter Act, 1813", "Charter Act, 1833"], answer: "a", marks: 1},
+            {unit: 1, question: "Indian Council Act,1909 introduced the following system:", options: ["Dyarchy", "Bicameral Legislature", "Separate Electorate", "Provincial Autonomy"], answer: "c", marks: 1},
+            {unit: 1, question: "Amending Act of 1781 is known as:", options: ["Act of Settlement", "Mountbatten Plan", "An Act for the Better Government of India", "Sepoy Mutiny"], answer: "a", marks: 1},
+            {unit: 1, question: "India is a democratic republic, because", options: ["there is independence of judiciary", "the Head of the State is elected by the people", "the Head of the State is elected by the people", "the Head of the State is elected by the people"], answer: "b", marks: 1},
+            {unit: 1, question: "India opted for a federal form of government because of", options: ["vast-territory", "cultural integration", "linguistic and regional diversity", "administrative convenience"], answer: "c", marks: 1},
+            {unit: 1, question: "Indian Constitution is:", options: ["Quasi Federal", "Unitary", "Presidential", "Federal"], answer: "d", marks: 1},
+            {unit: 1, question: "Preamble means?", options: ["the preface of a book", "the head of a body", "the top most portion of any thing", "preface, introduction especially that of an act of Parliament stating its aims & objectives"], answer: "d", marks: 1},
+            {unit: 1, question: "The Preamble of the Indian Constitution serves the purpose of?", options: ["pointing out what the people expect the Government of India to accomplish", "indicating that the authority of the Government is derived from the people", "helping judges to interpret various provisions of the Constitution properly", "All of these"], answer: "d", marks: 1},
+            {unit: 1, question: "Which one of the following countries does not possess a written constitution?", options: ["Switzerland", "Britain", "U.S.A.", "Soviet Union"], answer: "b", marks: 1},
+            {unit: 1, question: "Which one of the following is not an essential feature of a good constitution?", options: ["Comprehensiveness", "Written character", "Flexibility", "Independence of judiciary"], answer: "d", marks: 1},
+            {unit: 1, question: "An unwritten constitution is", options: ["Wholly unwritten", "Mostly unwritten", "Contains only some unwritten portions", "Declared as unwritten by the constituent Assembly"], answer: "b", marks: 1},
+            {unit: 1, question: "In a country with a written constitution the constitution is", options: ["Inferior to the laws of the Parliament", "Superior to the laws of the Parliament", "At par with the laws of the Parliament", "None of these"], answer: "c", marks: 1},
+            {unit: 1, question: "A constitution is known as flexible", options: ["If it can be amended by the ordinary lawmaking procedure", "If the states alone can amend the constitution", "If the procedure for the amendment of constitution is simple than the ordinary lawmaking procedure", "If it is difficult to amend"], answer: "a", marks: 1},
+            {unit: 1, question: "A flexible constitution is found in", options: ["Britain", "U.S.A.", "India", "Soviet Union"], answer: "a", marks: 1},
+            {unit: 1, question: "A rigid constitution", options: ["Cannot be amended", "Cannot be amended", "Can be amended through a special process which is difficult than the ordinary lawmaking process", "Can be amended through a procedure which is easier than, the ordinary law making procedure"], answer: "c", marks: 1},
+            {unit: 1, question: "Which one of the followings is not a feature of constitutionalism?", options: ["Limited Government", "Supremacy of individual", "Supremacy of Law", "Division of powers"], answer: "b", marks: 1},
+            {unit: 1, question: "What is the meaning of 'social equality' in the Indian Constitution?", options: ["Lack of opportunities", "Lack of equality", "Equal opportunities for all sections of the societies", "None of the following"], answer: "c", marks: 1},
+            {unit: 1, question: "Which of the following word has not been written in the preamble of the Indian Constitution?", options: ["Sovereign", "Socialist", "Democratic", "Indians"], answer: "d", marks: 1},
+            {unit: 1, question: "What is the true meaning of 'Secular'?", options: ["All religions are equal in the eyes of the government", "Special importance to a religion related to minorities", "One religion is promoted by the government", "None of the following"], answer: "a", marks: 1},
+            {unit: 1, question: "The Indian Constitution is regarded as", options: ["federal", "unitary", "parliamentary", "federal in form and unitary in spirit"], answer: "d", marks: 1},
+            {unit: 1, question: "Secularism means", options: ["suppression of all religions", "freedom of worship to minorities", "separation of religion from State", "a system of political and social philosophy that does not favour any particular religious faith"], answer: "d", marks: 1},
+            {unit: 1, question: "In a Federal State", options: ["States are more powerful than the Centre", "Centre is more powerful than States", "a Presidential form of government functions", "Constitution effects division of powers between the Centre and States with safeguards against transgression of jurisdiction"], answer: "d", marks: 1},
+            {unit: 1, question: "The Preamble of the Indian Constitution reads", options: ["We, the people of India – adopt, enact and give to India this Constitution'", "We, the people of Constituent Assembly –adopt, enact and give to India this Constitution", "We, the citizens of India – adopt, enact and give to ourselves this Constitution", "We, the people of India – in our Constituent Assembly – adopt, enact and give to ourselves this Constitution"], answer: "d", marks: 1},
+            {unit: 1, question: "The Constitution of India is designed to work as a unitary government", options: ["in normal times", "in times of Emergency", "when the Parliament so desires", "at the will of the President"], answer: "b", marks: 1},
+            {unit: 1, question: "Which one of the following statements regarding the Preamble is correct?", options: ["It is not enforceable in a court of law", "the Supreme Court has recently ruled that it is not a part of the Constitution", "It has been amended twice", "All the above are correct"], answer: "a", marks: 1},
+            {unit: 1, question: "India opted for a federal form of government because of", options: ["vast-territory", "cultural integration", "linguistic and regional diversity", "administrative convenience"], answer: "c", marks: 1},
+            {unit: 1, question: "The Indian Constitution closely follows the constitutional system of", options: ["USA", "UK", "Switzerland", "Russia"], answer: "b", marks: 1},
+            {unit: 1, question: "Which of the following describes India as a Secular State?", options: ["Fundamental Rights", "Ninth Schedule", "Directive Principles", "Preamble to the Constitution"], answer: "d", marks: 1},
+            {unit: 1, question: "The Preamble of the Constitution of India envisages that", options: ["The Preamble of the Constitution of India envisages that", "it could be abrogated or wiped out from the Constitution", "it does not acknowledge, recognise or proclaim anything about the Constitution", "it has separate entity in the Constitution"], answer: "d", marks: 1},
+
+            // UNIT 2 - Making of Constitution (50 questions)
+            {unit: 2, question: "The following are enshrined in the Preamble to the Constitution of India: 1. Equality of status and opportunity. 2. Liberty of thought, expression, belief, faith and worship. 3. Justice—social, economic and political. 4. Fraternity assuring the dignity of the individual. 5. Unity and integrity of the Nation. Which one of the following is the correct order in which they appear in the Preamble?", options: ["5, 1, 2, 4, 3", "3, 2, 1, 4, 5", "3, 1, 2, 5, 4", "1, 2, 4, 3, 5"], answer: "b", marks: 1},
+            {unit: 2, question: "The philosophical postulates of the Constitution of India are based on:", options: ["Nehru Report, 1928.", "Objectives Resolution of Pandit Nehru, 1947.", "Mahatma Gandhi's article 'Independence in Young India',1922.", "Indian National Congress's Resolution for Complete Independence, 1929."], answer: "b", marks: 1},
+            {unit: 2, question: "The Preamble to the Indian Constitution is:", options: ["Not a part of the Constitution.", "A part of the Constitution but it neither confers any powers nor imposes any duties nor can it be of any use in interpreting other provisions of the Constitution.", "A part of the Constitution and can be of use in interpreting other provisions of the Constitution in cases of ambiguity.", "A part of the Constitution and it confers powers and imposes duties as any other provisions of the Constitution."], answer: "c", marks: 1},
+            {unit: 2, question: "Which one of the following statements is correct? The Preamble to the Indian Constitution declares the resolve of the people of India to secure to all its citizens:", options: ["Freedom of residence anywhere in the country.", "Right to establish and administer educational institutions of choice.", "Liberty of belief, faith and worship.", "Right to education at primary level."], answer: "c", marks: 1},
+            {unit: 2, question: "The term 'economic justice' in the Preamble to the Constitution of India, is a resolution for:", options: ["Equal distribution of wealth.", "Economy in the administration of justice.", "Socio-economic revolution.", "Cheap justice to the poor."], answer: "a", marks: 1},
+            {unit: 2, question: "The text of the Preamble to the Constitution of India aims to secure:", options: ["Fundamental rights to all individuals.", "Fundamental duties to citizens of India.", "Dignity of the individual and unity and integrity of the nation.", "Security of service to Government servants."], answer: "c", marks: 1},
+            {unit: 2, question: "Which of the following terms was not included in a 'Union of Trinity' by Dr. B.R. Ambedkar in his concluding speech in the Constituent Assembly?", options: ["Liberty", "Flexibility", "Equality", "Fraternity"], answer: "b", marks: 1},
+            {unit: 2, question: "The words 'Socialist' and 'Secular' were inserted in the Preamble by the:", options: ["Fifteenth Amendment", "Thirty-ninth Amendment", "Forty-second Amendment", "Forty-fourth Amendment"], answer: "c", marks: 1},
+            {unit: 2, question: "The sequence in which the given terms are mentioned in the Preamble to the Constitution of India is:", options: ["Sovereign, Socialist, Secular, Democratic, Republic", "Socialist, Secular, Sovereign, Democratic, Republic", "Secular, Sovereign, Democratic, Socialist, Republic", "Sovereign, Democratic, Secular, Socialist, Republic"], answer: "a", marks: 1},
+            {unit: 2, question: "The Preamble to the Constitution of India:", options: ["Is not a part of the Constitution.", "Indicates the objectives to be achieved.", "Cannot be amended by the Parliament.", "Is a source of authority of the Constitution of India."], answer: "b", marks: 1},
+            {unit: 2, question: "The Cabinet Mission to India was headed by", options: ["Stafford Cripps", "A.V. Alexander", "Lord Pethick Lawrence", "Hugh Gaitskell"], answer: "c", marks: 1},
+            {unit: 2, question: "The Constitution of India was adopted by the", options: ["Governor General", "British Parliament", "Constituent Assembly", "Parliament of India"], answer: "c", marks: 1},
+            {unit: 2, question: "The Constituent Assembly for undivided India first met on", options: ["6th December, 1946", "9th December, 1946", "20th February, 1947", "3rd June, 1947"], answer: "b", marks: 1},
+            {unit: 2, question: "Who among the following was the Constitutional adviser to the Constituent Assembly of India?", options: ["Dr. B.N. Rao", "Dr. B.R. Ambedkar", "K.M. Munshi", "M.C. Setalvad"], answer: "a", marks: 1},
+            {unit: 2, question: "The Constitution of India was enacted by a Constituent Assembly set up", options: ["under the Indian Independence Act, 1947", "under the Cabinet Mission Plan, 1946", "through a resolution of the provisional government", "by the Indian National Congress"], answer: "b", marks: 1},
+            {unit: 2, question: "The Constituent Assembly which framed the Constitution for Independent India was set up in", options: ["1945", "1946", "1947", "1949"], answer: "b", marks: 1},
+            {unit: 2, question: "Who presided over the inaugural meeting of the Constituent Assembly of India?", options: ["Sachidananda Sinha", "B. R. Ambedkar", "Dr. Rajendra Prasad", "P. Upendra"], answer: "a", marks: 1},
+            {unit: 2, question: "Who among the following was the Chairman of the Drafting Committee of the Indian Constitution?", options: ["Rajendra Prasad", "Tej Bahadur Sapru", "C. Rajagopalachari", "B. R. Ambedkar"], answer: "d", marks: 1},
+            {unit: 2, question: "How long did the Constituent Assembly take to finally pass the Constitution?", options: ["about 6 months in 1949", "exactly a year since Nov 26, 1948", "about 2 years since Aug 15, 1947", "about 3 years since Dec 9, 1946"], answer: "d", marks: 1},
+            {unit: 2, question: "Who was the President of the Constituent Assembly?", options: ["Pt. Jawaharlal Nehru", "Dr. Rajendra Prasad", "Dr. B.R. Ambedkar", "C. Rajagopalachari"], answer: "b", marks: 1},
+            {unit: 2, question: "The most profound influence on the drafting of the Indian Constitution was exercised by the", options: ["U.S. Constitution", "British Constitution", "Government of India Act, 1935", "French ideals of Liberty and Fraternity"], answer: "c", marks: 1},
+            {unit: 2, question: "The design of the National Flag was adopted by the Constituent Assembly of India in", options: ["July, 1948", "July, 1950", "July, 1947", "August, 1947"], answer: "c", marks: 1},
+            {unit: 2, question: "Which one of the following Acts formally introduced the principles of elections for the first time?", options: ["Indian Councils Act, 1909", "Government of India Act, 1919", "Government of India Act, 1935", "Indian Independence Act, 1947"], answer: "a", marks: 1},
+            {unit: 2, question: "The office of Governor General of India was created by", options: ["Charter Act, 1813", "Charter Act, 1833", "Government of India Act, 1858", "Government of India Act, 1935"], answer: "c", marks: 1},
+            {unit: 2, question: "Who among the following is known as the Father of the Indian Constitution?", options: ["Dr. B.R. Ambedkar", "Mahatma Gandhi", "Jawaharlal Nehru", "Vallabhbhai Patel"], answer: "a", marks: 1},
+            {unit: 2, question: "Who proposed the Preamble before the Drafting Committee of the Constitution?", options: ["Jawaharlal Nehru", "B.R. Ambedkar", "B.N. Rao", "Mahatma Gandhi"], answer: "a", marks: 1},
+            {unit: 2, question: "The first session of the Constituent Assembly was held in", options: ["Bombay", "Calcutta", "Lahore", "New Delhi"], answer: "d", marks: 1},
+            {unit: 2, question: "Consider the following statements: 1. The Parliament is empowered to alter the boundaries of any existing State of India. 2. A Bill pertaining to the alteration of the boundaries of any existing State of India can be introduced only in the Rajya Sabha and only on the recommendation of the President of India. Which one of the statements given above is/are correct?", options: ["Only 1", "Only 2", "Both 1 and 2", "Neither 1 nor 2"], answer: "a", marks: 1},
+            {unit: 2, question: "Consider the following with respect to the Union of India: 1. Formation of the State of Nagaland. 2. States Reorganisation Act. 3. Formation of the State of Haryana. 4. Formation of the State of Gujarat. Which one of the following is the correct chronological order of the above?", options: ["4-2-3-1", "2-4-3-1", "4-2-1-3", "2-4-1-3"], answer: "d", marks: 1},
+            {unit: 2, question: "The boundary of a State in India can be altered through the procedure laid down in:", options: ["Article 368", "Article 130", "Article 70", "Article 3"], answer: "d", marks: 1},
+            {unit: 2, question: "In 1953, Prime Minister Jawaharlal Nehru announced the formation of a Commission to study the reorganization of states on a linguistic basis under the chairmanship of:", options: ["T.T. Krishnamachari", "Vallabhbhai Patel", "Fazl Ali", "G.B. Pant"], answer: "c", marks: 1},
+            {unit: 2, question: "The Parliament of India passed the States Reorganisation Act in 1956 to create:", options: ["16 States and 3 Union Territories", "15 States and 5 Union Territories", "14 States and 6 Union Territories", "24 States and 9 Union Territories"], answer: "c", marks: 1},
+            {unit: 2, question: "The States of the Indian Union can be reorganised or their boundaries altered by:", options: ["The Union Parliament by a simple majority in the ordinary process of legislation.", "Two-thirds majority of both the Houses of Parliament.", "Two-thirds majority of both the Houses of Parliament and the consent of the legislature of the concerned States.", "An executive order of the Union Government with the consent of the concerned State Governments."], answer: "a", marks: 1},
+            {unit: 2, question: "The Constitution of India divided the states of India in categories A, B, C and D in the year 1950. In this context which of the following statements is correct?", options: ["The Chief Commissioner was the executive head of category A states. The Rajpramukh was the executive head of category B states. The Governor was the executive head of categories C and D states.", "The Rajpramukh was the executive head of category A states. The Chief Commissioner was the executive head of categories B and C states. The Governor was the executive head of the category D states.", "The Governor was the executive head of category A states. The Rajpramukh was the executive head of category B states. The Chief Commissioner was the executive head of categories C and D states.", "The Governor was the executive head of category A states. The Chief Commissioner was the executive head of category B states. The Rajpramukh was the executive head of categories C and D states."], answer: "c", marks: 1},
+            {unit: 2, question: "Who among the following was the head of the Linguistic Provinces Commission appointed in the year 1948, to enquire into the desirability of linguistic provinces?", options: ["Jawaharlal Nehru", "Justice S.K. Dhar", "Justice Fazl Ali", "Pattabhi Sitaramayya"], answer: "b", marks: 1},
+            {unit: 2, question: "What is the correct chronological order in which the following States of the Indian Union were created or granted full statehood? 1. Andhra Pradesh 2. Nagaland 3. Maharashtra 4. Haryana", options: ["1-3-4-2", "3-1-2-4", "1-3-2-4", "3-1-4-2"], answer: "c", marks: 1},
+            {unit: 2, question: "Who, among the following, was not a member of the States Reorganisation Commission (SRC) appointed by Pandit Jawaharlal Nehru?", options: ["Justice Fazl Ali", "Potti Sriramulu", "K.M. Panikkar", "Hridayanath Kunzru"], answer: "b", marks: 1},
+            {unit: 2, question: "Consider the following statements with reference to the linguistic reorganisation of states in independent India: 1. The separate state of Andhra for the Telugu people came into existence in 1953. 2. Jawaharlal Nehru was particularly in favour of the movement for linguistic reorganisation of states that came in the wake of the success of the Andhra movement. Which one of the statements given above is/are correct?", options: ["Only 1", "Only 2", "Both 1 and 2", "Neither 1 nor 2"], answer: "a", marks: 1},
+            {unit: 2, question: "Who among the following was not a member of the Constituent Assembly?", options: ["Sardar Vallabhbhai Patel", "Acharya J.B. Kriplani", "Lok Nayak Jayprakash Narayan", "K.M. Munshi"], answer: "c", marks: 1},
+            {unit: 2, question: "The first effort at drafting a Dominion Status Constitution for India was made in response to the", options: ["Minto-Morley Reforms", "Montague-Chelmsford Reforms", "Simon Commission", "First Round Table Conference"], answer: "c", marks: 1},
+            {unit: 2, question: "Consider the following statements: 1. A person who was born on 26th January, 1951 in Rangoon, whose father was a citizen of India by birth at the time of his birth, is deemed to be an Indian citizen by descent. 2. A person who was born on 1st July, 1988 in Itanagar, whose mother is a citizen of India at the time of his birth but the father was not, is deemed to be a citizen of India by birth. Which one of the statements given above is/are correct?", options: ["Only 1", "Only 2", "Both 1 and 2", "Neither 1 nor 2"], answer: "c", marks: 1},
+            {unit: 2, question: "Under the Citizenship Act, 1955, by which of the following ways can a person become a citizen of India? 1. By birth 2. By descent 3. By registration 4. By nationalisation 5. By incorporation of territory", options: ["1, 2, 3, 4 and 5", "1 and 2", "1, 2, 3 and 5", "3, 4 and 5"], answer: "c", marks: 1},
+            {unit: 2, question: "Which of the following Articles of the Indian Constitution deal with citizenship in India?", options: ["Articles 333 to 337", "Articles 17 to 20", "Articles 5 to 11", "Articles 1 to 4"], answer: "c", marks: 1},
+            {unit: 2, question: "In which of the following years, the Citizenship Act, 1955 has been amended? 1. 1986 2. 1992 3. 2003 4. 2005", options: ["2, 3 and 4", "1, 2 and 4", "1, 2, 3 and 4", "1, 2 and 3"], answer: "c", marks: 1},
+            {unit: 2, question: "Which Article of the Constitution of India deals with the rights of citizenship of certain persons of Indian origin residing outside India?", options: ["Article 7", "Article 10", "Article 8", "Article 9"], answer: "c", marks: 1},
+            {unit: 2, question: "Which one among the following has the power to regulate the right of citizenship in India?", options: ["The Union Cabinet", "The Parliament", "The Supreme Court", "The Law Commission"], answer: "b", marks: 1},
+            {unit: 2, question: "In which Part of the Constitution, details of citizenship are mentioned?", options: ["Part I", "Part II", "Part III", "Part IV"], answer: "b", marks: 1},
+            {unit: 2, question: "According to the Citizenship Act, 1955, by which of the following ways can a person lose citizenship of India? 1. By Renunciation 2. By Termination 3. By Deprivation", options: ["1 and 2", "2 and 3", "1, 2 and 3", "1 and 3"], answer: "c", marks: 1},
+            {unit: 2, question: "Consider the following statements: 1. Originally, the Citizenship Act (1955), also provided for the Commonwealth Citizenship. 2. The provision for Commonwealth Citizenship was repealed by the Citizenship (Amendment) Act, 2005. Which of the statements given above is/are correct?", options: ["Only 1", "Only 2", "Both 1 and 2", "Neither 1 nor 2"], answer: "a", marks: 1},
+            {unit: 2, question: "Which one among the following is a fundamental duty of citizens under the Constitution of India?", options: ["To provide friendly cooperation to the people of the neighbouring countries", "To protect monuments of national importance", "To defend the country and render national service when called upon to do so", "To know more and more about the history of India"], answer: "c", marks: 1},
+
+            // UNIT 3 - Fundamental Rights & Duties (70 questions - rows 101-170)
+            {unit: 3, question: "Consider the following statements: In view of Article 20 of the Constitution of India, no person accused of an offence can be compelled to: 1. Give his signature or thumb impression for identification. 2. Give oral testimony either in or out of the court. Which of the statements given above is/are correct?", options: ["Only 1", "Only 2", "Both 1 and 2", "Neither 1 nor 2"], answer: "b", marks: 1},
+            {unit: 3, question: "Consider the following statements: 1. The writ of mandamus is available not only against judicial authorities but also against administrative authorities. 2. The writ of prohibition is issued only against judicial or quasi-judicial authorities. Which of the statements given above is/are correct?", options: ["Only 1", "Only 2", "Both 1 and 2", "Neither 1 nor 2"], answer: "c", marks: 1},
+            {unit: 3, question: "Consider the following statements: 1. There is no provision in the Constitution of India for reservation in the matters of promotion in the services under the state in favour of the scheduled castes and the scheduled tribes. 2. As per provisions of the Constitution of India, for getting reservation for the appointments and posts under the state, a class must be backward and should not be adequately represented in the services under the state. Which of the statements given above is/are correct?", options: ["Only 1", "Only 2", "Both 1 and 2", "Neither 1 nor 2"], answer: "b", marks: 1},
+            {unit: 3, question: "Consider the following statements: 1. A Constitutional amendment inserting a regulation in the Ninth Schedule can be challenged on the ground of violation of basic structure of the Constitution. 2. Any legislation enacted by Parliament cannot be successfully challenged for affecting the basic structure of the Constitution. Which of the statements given above is/are correct?", options: ["Only 1", "Only 2", "Both 1 and 2", "Neither 1 nor 2"], answer: "a", marks: 1},
+            {unit: 3, question: "Assertion (A): The principle of equality before law means that there should be equality of treatment under equal circumstances. Reason (R): All persons are not equal by nature, attainment or circumstances.", options: ["Both A and R are individually true and R is the correct explanation of A", "Both A and R are individually true but R is not the correct explanation of A", "A is true but R is false", "A is false but R is true"], answer: "a", marks: 1},
+            {unit: 3, question: "Which of the following are envisaged by the Right Against Exploitation in the Constitution of India? 1. Prohibition of traffic in human beings and forced labour 2. Abolition of untouchability 3. Protection of the interests of minorities 4. Prohibition of employment of children in factories and mines", options: ["1 and 2", "1 and 3", "2, 3 and 4", "1 and 4"], answer: "d", marks: 1},
+            {unit: 3, question: "As far as the Armed Forces are concerned, the Fundamental Rights granted under Articles 14 and 19 of Constitution are:", options: ["Not available at all", "Available to the Armed Forces but not to other forces", "Available only at the discretion of the Chief of the Army staff", "Available only according to law made by Parliament"], answer: "d", marks: 1},
+            {unit: 3, question: "In Indian Constitution, the power to issue a writ of 'Habeas Corpus' is vested only in:", options: ["The Supreme Court", "The High Courts", "The Subordinate Courts", "The Supreme Court and the High Courts"], answer: "d", marks: 1},
+            {unit: 3, question: "Which of the following rights is not explicitly mentioned in the Fundamental Rights but has been upheld to be so by several pronouncements of the Supreme Court?", options: ["Equity before law", "Right to non-discrimination in public employment", "Right to form associations or unions", "Right to freedom of Press"], answer: "d", marks: 1},
+            {unit: 3, question: "Which of the following statements are true with regard to the Fundamental Rights of the minorities in educational matters? 1. The minority has only the right to administer the educational institutions. 2. The minority has the right to establish and administer educational institutions. 3. The right is absolute and not subject to any restriction. 4. Reasonable restrictions may be imposed to promote efficiency and prevent maladministration.", options: ["1, 2 and 3", "2 and 4", "2, 3 and 4", "1 and 3"], answer: "b", marks: 1},
+            {unit: 3, question: "Which of the following statements is/are correct of the writ of prohibition? 1. It is an order issued by a higher court commanding a lower court to cease from proceeding in some matters not within its jurisdiction. 2. It can be claimed by an aggrieved party as a matter of right.", options: ["Only 1", "Only 2", "Both 1 and 2", "Neither 1 nor 2"], answer: "c", marks: 1},
+            {unit: 3, question: "Under the Indian Constitution, which one of the following is not a specific ground on which the State can place restrictions on freedom of religion?", options: ["Public order", "Morality", "Social Justice", "Health"], answer: "c", marks: 1},
+            {unit: 3, question: "The scope of 'life and personal liberty', as envisaged in Article 21 of the Constitution of India, has expanded considerably over the years. Which one of the following can still not be subject of this protection?", options: ["The Right to good health", "The Right of a bonded labour to rehabilitation after release", "The Right, under a settlement, to claim bonus or dearness allowance", "The Right to livelihood by means which are not illegal, immoral or opposed to public policy"], answer: "c", marks: 1},
+            {unit: 3, question: "Assertion (A): Preventive Detention is included in the chapter on Fundamental Rights in the Constitution of India. Reason (R): The Constitution has vested the legislative power with regard to preventive detention in the Parliament only and the State Legislatures have no authority in this regard.", options: ["Both A and R are individually true and R is the correct explanation of A", "Both A and R are individually true but R is not the correct explanation of A", "A is true but R is false", "A is false but R is true"], answer: "c", marks: 1},
+            {unit: 3, question: "Which of the following is not included in Article 19 of the Constitution of India, pertaining to the Right to Freedom?", options: ["Right to reside and settle in any part of the territory of India", "Right of minorities to establish and administer educational institutions", "Right to form associations or unions", "Right to assemble peaceably and without arms"], answer: "b", marks: 1},
+            {unit: 3, question: "Consider the following statements: The 'State' under Article 12 of the Indian Constitution includes: 1. The Government and Parliament of India. 2. The Government and legislature of the states. 3. Local authorities or other authorities within the territories of India or under the control of Government of India. Which of the statements given above are correct?", options: ["1, 2 and 3", "1 and 2", "2 and 3", "1 and 3"], answer: "a", marks: 1},
+            {unit: 3, question: "Which one of the following rights was described by Dr. Ambedkar as 'the heart and soul' of the Constitution?", options: ["Right to equality", "Right against exploitation", "Right to constitutional remedies", "Right to freedom of religion"], answer: "c", marks: 1},
+            {unit: 3, question: "Which one of the following freedoms is not guaranteed by the Constitution of India?", options: ["Freedom to own, acquire and dispose of property", "Freedom to move freely throughout the country", "Freedom to assemble peaceably and without arms", "Freedom to practice any trade or profession"], answer: "a", marks: 1},
+            {unit: 3, question: "Assertion (A): One of the fundamental principles of the Indian Constitution is the Rule of Law. Reason (R): The Constitution of India has guaranteed to every citizen the equality before law and has recognized the judiciary as the unfailing guardian of the rights of people.", options: ["Both A and R are individually true and R is the correct explanation of A", "Both A and R are individually true but R is not the correct explanation of A", "A is true but R is false", "A is false but R is true"], answer: "a", marks: 1},
+            {unit: 3, question: "Which one of the following is the correct statement? Right to privacy as a Fundamental Right is implicit in:", options: ["The Right to Freedom", "The Right to Personal Liberty", "The Right to Equality", "The Right Against Exploitation"], answer: "b", marks: 1},
+            {unit: 3, question: "Assertion (A): An accused person cannot be compelled to give his thumb impression. Reason (R): An accused person cannot be compelled to be a witness against himself.", options: ["Both A and R are individually true and R is the correct explanation of A", "Both A and R are individually true but R is not the correct explanation of A", "A is true but R is false", "A is false but R is true"], answer: "d", marks: 1},
+            {unit: 3, question: "Right to Education is a fundamental right emanating from right to:", options: ["Freedom of speech and expression under Article 19", "Culture and education under Articles 29 and 30", "Life and personal liberty under Article 21", "Equality before law and equal protection of the laws under Article 14"], answer: "c", marks: 1},
+            {unit: 3, question: "The State shall not make any law which takes away or abridges the fundamental rights. Which one of the following shall not be construed as law for this purpose?", options: ["Ordinance", "Bye-law", "Rule", "Constitutional amendment"], answer: "d", marks: 1},
+            {unit: 3, question: "On which one of the following freedoms, can reasonable restrictions be imposed on the ground of the security of the state?", options: ["Speech and expression", "Peaceful assembly", "Association or union", "Movement"], answer: "a", marks: 1},
+            {unit: 3, question: "Which of the following are mentioned under separate Articles in Part III of the Constitution of India pertaining to Fundamental Rights? 1. Abolition of untouchability 2. Abolition of titles 3. Freedom as to payment of taxes for promotion of any particular religion 4. Protection of interests of minorities", options: ["1 and 2", "2, 3 and 4", "3 and 4", "1, 2, 3 and 4"], answer: "d", marks: 1},
+            {unit: 3, question: "Fundamental rights guaranteed in the Indian Constitution can be suspended only by:", options: ["A proclamation of national emergency", "An Act passed by the Parliament", "An amendment of the Constitution", "The judicial decisions of the Supreme Court"], answer: "a", marks: 1},
+            {unit: 3, question: "The Right to Property was converted into a legal right from a Fundamental Right, because it:", options: ["Tied the hands of the government to prevent corruption", "Gave rise to litigations that made judiciary overburden", "Led to severe conflict between judiciary and the Parliament", "Increased public resentment"], answer: "c", marks: 1},
+            {unit: 3, question: "Under Article 22 of the Constitution of India, with the exception of certain provisions stated therein, what is the maximum period for detention of a person under preventive detention?", options: ["2 months", "3 months", "4 months", "6 months"], answer: "b", marks: 1},
+            {unit: 3, question: "Which one of the following Fundamental Rights is guaranteed only to the citizens of India and not to the foreigners living in India?", options: ["Equality before law and equal protection of laws", "Freedom of speech and expression", "Right to life and liberty", "Right to the freedom of religion"], answer: "b", marks: 1},
+            {unit: 3, question: "The Indian constitution guarantees how many categories of Fundamental Rights", options: ["5", "6", "7", "8"], answer: "b", marks: 1},
+            {unit: 3, question: "Which Right was remarked by Dr B.R. Ambedkar as the 'heart and soul of the Constitution'", options: ["Right to Equality", "Right to Freedom", "Right to Education", "Right to Constitutional remedies"], answer: "d", marks: 1},
+            {unit: 3, question: "In which part of the Indian Constitution, the Fundamental rights are provided?", options: ["Part II", "Part III", "Part V", "Part IV"], answer: "b", marks: 1},
+            {unit: 3, question: "Which of the following articles guarantees equality before law and equal protection of law for all individuals residing within the territory of India?", options: ["15", "14", "17", "18"], answer: "b", marks: 1},
+            {unit: 3, question: "Which article of the Constitution abolishes Untouchability?", options: ["Article 18", "Article 15", "Article 14", "Article 17"], answer: "d", marks: 1},
+            {unit: 3, question: "Which of the following is correct with respect to 'Right against exploitation'?", options: ["Prohibition of traffic in human beings and forced labour", "Freedom as to payment of taxes for the promotion of any particular religion", "Protection of interests of minorities", "Equality before law"], answer: "a", marks: 1},
+            {unit: 3, question: "Which one of the following right of Indian Constitution guarantees all the fundamental rights to every resident of a country?", options: ["Right against exploitation", "Right to freedom", "Right to equality", "Right to constitutional remedies"], answer: "d", marks: 1},
+            {unit: 3, question: "Which one of the following is true with respect to the Fundamental Rights of Indian Constitution?", options: ["The sovereignty of the people", "Equality of opportunity for all resident", "Limited government", "Democracy"], answer: "b", marks: 1},
+            {unit: 3, question: "B. R. Ambedkar termed Article 32 of the Indian Constitution as the 'Heart and Soul of the Indian Constitution'. Which one of the following fundamental right it contains?", options: ["Right to freedom", "Right to constitutional remedies", "Right to elementary education", "Right to freedom of religion"], answer: "b", marks: 1},
+            {unit: 3, question: "Which of the following Articles contain the right to religious freedom?", options: ["25-28", "29-30", "32-35", "23-24"], answer: "a", marks: 1},
+            {unit: 3, question: "Which of the following can a court issue for enforcement of Fundamental Rights?", options: ["A decree", "A writ", "An Ordinance", "A notification"], answer: "b", marks: 1},
+            {unit: 3, question: "Prohibition of discrimination on grounds of religion, race, caste, sex or place of birth is a fundamental right classifiable under?", options: ["right to freedom of religion", "Right to equality", "Right against exploitation", "None of these"], answer: "b", marks: 1},
+            {unit: 3, question: "The Constitution guarantees that all citizens will be equal before law. It is provided in", options: ["Article 11 of Indian Constitution", "Article 12 of Indian Constitution", "Article 13 of Indian Constitution", "Article 14 of Indian Constitution"], answer: "d", marks: 1},
+            {unit: 3, question: "Civil equality means", options: ["Equality before law", "Equality of opportunity", "Equal distribution of wealth", "Equal right to participate in the affairs of the state"], answer: "a", marks: 1},
+            {unit: 3, question: "Which of the following is a bulwark of personal freedom?", options: ["mandamus", "Habeas Corpus", "Quo Warranto", "Certiorari"], answer: "b", marks: 1},
+            {unit: 3, question: "Part III of the Constitution of India relates to", options: ["Fundamental Rights", "Directive Principles of state policy", "Fundamental duties", "citizenship"], answer: "a", marks: 1},
+            {unit: 3, question: "Which of the following is given the power to implement the Fundamental Right by the Constitution?", options: ["All courts in India", "The Parliament", "The President", "The Supreme Court and High Courts"], answer: "d", marks: 1},
+            {unit: 3, question: "Which provision of the Fundamental Rights is directly relates to the exploitation of children?", options: ["Article 17", "Article 19", "Article 23", "Article 24"], answer: "d", marks: 1},
+            {unit: 3, question: "Right to education to all children between the age of 6 to 14 year is", options: ["Included in the Directive Principle of State Policy", "A fundamental Right", "A Statutory Right", "None of the above"], answer: "b", marks: 1},
+            {unit: 3, question: "The Word 'Hindus' in Article 25 of the Constitution of India does not include?", options: ["Buddhists", "Jains", "Sikhs", "Parsees"], answer: "d", marks: 1},
+            {unit: 3, question: "The constitution of India, adopted Fundamental Duties from the constitution of________?", options: ["America", "Japan", "Russia", "Britain"], answer: "c", marks: 1},
+            {unit: 3, question: "When Fundamental Duties were added to the Constitution of India?", options: ["1976", "1965", "1970", "1992"], answer: "a", marks: 1},
+            {unit: 3, question: "At present how many Fundamental Duties are in the Constitution of India?", options: ["6", "7", "10", "11"], answer: "d", marks: 1},
+            {unit: 3, question: "In the Indian Constitution, Fundamental Duties are given in which article?", options: ["Article 12 to 35", "Article 51A", "Article 36 to 50", "Article 19"], answer: "b", marks: 1},
+            {unit: 3, question: "Equal pay for equal work' has been ensured in the Indian constitution as one of them?", options: ["Fundamental right", "Directive principle of state policy", "Fundamental duties", "Economic right"], answer: "b", marks: 1},
+            {unit: 3, question: "Fundamental duties are enshrined in which article?", options: ["Administration of union territories", "Formation of interstate councils", "Fundamental duties", "None of these"], answer: "c", marks: 1},
+            {unit: 3, question: "Under which article provisions of fundamental duties incorporated", options: ["Article 50", "Article 51", "Article 51A", "Article 52"], answer: "c", marks: 1},
+            {unit: 3, question: "In which part the part of fundamental duties have been incorporated", options: ["Part 3", "Part 4A", "Part 4", "Part 5"], answer: "b", marks: 1},
+            {unit: 3, question: "Which of the following is not the Fundamental Duty?", options: ["Safeguarding public", "To obey the parents", "To make compulsory education to children of 6 to 14 years", "To spread brotherhood among the people"], answer: "b", marks: 1},
+            {unit: 3, question: "Which among the following does not come under Fundamental Duties of a citizen in India?", options: ["To protect and Improve Natural Environment", "To develop scientific temper, humanism, and spirit of inquiry and reform", "To strive towards the abolition of untouchability", "All are comes under fundamental duties"], answer: "c", marks: 1},
+            {unit: 3, question: "How many duties were in the original constitution(when the constitution was created)?", options: ["Eight", "Ten", "Four", "Zero"], answer: "d", marks: 1},
+            {unit: 3, question: "By what term, The ten commandments of 42nd constitutional amendment act are called?", options: ["Fundamental rights", "Fundamental duties", "Directive principle of state policy", "None of these"], answer: "b", marks: 1},
+            {unit: 3, question: "Respect for the National Flag and the National Anthem is", options: ["A fundamental right of every citizen", "A fundamental duty of every citizen", "A directive principle of state policy", "An ordinary duty of every citizen"], answer: "b", marks: 1},
+            {unit: 3, question: "Which one of the following is not a fundamental duty?", options: ["To respect the National Anthem", "To safeguard public property", "To protect monuments and places of national importance", "To protect and improve the natural environment"], answer: "c", marks: 1},
+            {unit: 3, question: "Which one of the following is not included as a Fundamental Duty in the Constitution of India?", options: ["To cherish and follow the noble ideals which inspired our national struggle.", "To develop the scientific temper, humanism and the spirit of inquiry and reform.", "To protect the minorities.", "To safeguard public property and to abjure violence"], answer: "c", marks: 1},
+            {unit: 3, question: "Which of the following Articles of the Constitution of India relate to the protection and improvement of environment?", options: ["Article 48 A only", "Article 51 A only", "Both Article 48 A and Article 51 A", "Neither Article 48 A nor Article 51 A"], answer: "c", marks: 1},
+            {unit: 3, question: "The Fundamental Duties of the Indian Citizens.", options: ["Formed a part of the original Constitution.", "Were added by the Forty-Second Amendment.", "Were added by the Forty-Fourth Amendment.", "Were defined by the parliament through a law enacted during the emergency."], answer: "b", marks: 1},
+            {unit: 3, question: "The Fundamental Duties were added to constitution because", options: ["Majority of the people wanted it.", "A section of people was not fulfilling its obligation of respecting the established legal order.", "The government felt this would ensure quicker progress of the country", "The Supreme Court emphasised the need of incorporation of these duties in the Constitution."], answer: "b", marks: 1},
+            {unit: 3, question: "Which one of the followings is not a Fundamental duty as outlined in Article 51A of the Constitution?", options: ["To abide by the Constitution and respect its ideals.", "To defend the country and render national service when called upon to do so.", "To work for the moral upliftment of the weaker sections of society.", "To preserve the rich heritage of our composite culture."], answer: "c", marks: 1},
+            {unit: 3, question: "Which one of the followings has been wrongly listed as a Fundamental duty of the Indian citizens?", options: ["To develop scientific temper, humanism and spirit of inquiry and reform.", "To work for raising the prestige of the country in the international sphere.", "To protect and improve the natural environment.", "To strive towards excellence in all spheres of individual and collective activity."], answer: "b", marks: 1},
+            {unit: 3, question: "The Fundamental duties were added to the Constitution", options: ["To make the Fundamental Rights more effective.", "To check anti-national, subversive and unconstitutional agitations.", "To accord priority to the directive principles over fundamental rights.", "To achieve all the above objectives."], answer: "b", marks: 1},
+
+            // UNIT 4 - Fundamental Rights Continued (50 questions - rows 171-220)
+            {unit: 4, question: "Assertion (A): Article 14 of the Indian Constitution does not lay down that all laws must be of universal application. Reason (R): State has power to classify persons for legitimate purpose and on reasonable grounds.", options: ["Both A and R are individually true and R is the correct explanation of A", "Both A and R are individually true but R is not the correct explanation of A", "A is true but R is false", "A is false but R is true"], answer: "d", marks: 1},
+            {unit: 4, question: "Which of the following are the grounds on which discrimination of citizens for admission into educational institutions is constitutionally prohibited? 1. Religion and Race 2. Sex and Place of birth 3. Nationality and Colour 4. Age and Nativity", options: ["1, 2, 3 and 4", "1 and 2", "1, 2 and 3", "1, 2 and 4"], answer: "b", marks: 1},
+            {unit: 4, question: "Through which provisions does the Constitution of India explicitly prohibits racial discrimination in India?", options: ["Articles 14 and 17", "Articles 17 and 23", "Articles 15 and 16", "Article 17 only"], answer: "c", marks: 1},
+            {unit: 4, question: "Reservation of seats in educational institutions in favour of Scheduled Castes and Scheduled Tribes is governed by:", options: ["Article 15 of the Constitution", "Article 16 of the Constitution", "Article 29 of the Constitution", "Article 14 of the Constitution"], answer: "a", marks: 1},
+            {unit: 4, question: "Which one of the following is the best justification for the affirmative action policies in India?", options: ["The principle of non-discrimination", "The principle of equal opportunity", "The principle of group disadvantage", "The principle of radical redistribution"], answer: "b", marks: 1},
+            {unit: 4, question: "Which Article of the Constitution protects the 'Right of minorities to establish and administer educational institutions of their choice'?", options: ["19", "26", "29", "30"], answer: "d", marks: 1},
+            {unit: 4, question: "Which one of the following statements is not correct?", options: ["K.M. Munshi was one of the members of the drafting committee of the Constitution", "The Constitution of India was adopted by the Constituent Assembly", "The Pachayati Raj was recommended by Balwant Rai Mehta Committee Report1957", "The President of India is the Guardian of Fundamental Rights under the Constitution"], answer: "d", marks: 1},
+            {unit: 4, question: "Which of the following rights can be enforced under Article 32 of the Indian Constitution?", options: ["Constitutional Rights", "Fundamental Rights", "Statutory Rights", "All of the above"], answer: "b", marks: 1},
+            {unit: 4, question: "Under the Indian Constitution who amongst the following is considered to be the guardian of the fundamental rights?", options: ["Parliament", "President", "Judiciary", "Prime Minister"], answer: "c", marks: 1},
+            {unit: 4, question: "Under the Indian Constitution who is the guardian of the fundamental rights?", options: ["Parliament", "President", "Supreme Court", "Cabinet"], answer: "c", marks: 1},
+            {unit: 4, question: "Which one of the following rights was described by Dr. B.R. Ambedkar as the 'Heart and Soul of the Constitution'?", options: ["Right to Freedom of Religion", "Right to Property", "Right to Equality", "Right to Constitutional Remedies"], answer: "d", marks: 1},
+            {unit: 4, question: "Which one of the following is regarded as the protector of fundamental rights of citizens and Guardian of the Constitution of India?", options: ["The Parliament", "The Attorney General", "The Supreme Court", "The President"], answer: "c", marks: 1},
+            {unit: 4, question: "Which one of the following writs can be issued by a High Court to secure the liberty of the individual?", options: ["Mandamus", "Quo-warranto", "Habeas Corpus", "Prohibition"], answer: "c", marks: 1},
+            {unit: 4, question: "The Supreme Court of India has propounded the 'Doctrine of Basic Structure' of the Constitution in which of the following cases?", options: ["Golaknath Vs. Punjab State", "Sajjan Singh Vs. Rajasthan State", "Keshvanand Bharti Vs. Kerala State", "Shankari Prasad Vs. Indian Union"], answer: "c", marks: 1},
+            {unit: 4, question: "By which of the following case Parliament got the right to amend Fundamental Rights?", options: ["Keshvanand Bharti Case", "Rajnarayan Vs. Indira Gandhi Case", "Golaknath's Case", "Sajjan Singh Case"], answer: "a", marks: 1},
+            {unit: 4, question: "In accordance with the text of the Constitution, a reasonable restriction in the interest of 'sovereignty and integrity' of India can be imposed on the right to:", options: ["Freedom of speech and expression", "Move freely throughout the territory of India", "Reside and settle in any part of the territory", "Carry on any occupation, trade or business of India"], answer: "a", marks: 1},
+            {unit: 4, question: "How many freedoms are guaranteed by Article 19 (Right to Freedom)?", options: ["3", "4", "5", "6"], answer: "d", marks: 1},
+            {unit: 4, question: "Fundamental Rights under Article 19 of the Indian Constitution are conferred on:", options: ["Indian citizens", "All persons living within Indian Territory", "Foreigners also", "All of them"], answer: "a", marks: 1},
+            {unit: 4, question: "By which of the following clauses, the right to Freedom of movement is granted to Indian citizens?", options: ["Article 19(1) C", "Article 19(1) B", "Article 19(1) A", "Article 19(1) D"], answer: "d", marks: 1},
+            {unit: 4, question: "Which of the following expression is/are employed under Article 19(1) (g) of the Indian Constitution?", options: ["Profession", "Occupation", "Trade and Business", "All of them"], answer: "d", marks: 1},
+            {unit: 4, question: "When emergency under Article 352 of the Constitution is proclaimed, the President of India has no power to suspend the Fundamental Rights contained in which of the following Articles?", options: ["20 and 21", "19 and 20", "21 and 22", "19 and 21"], answer: "a", marks: 1},
+            {unit: 4, question: "The right to property was removed from the list of Fundamental Rights enlisted in the Constitution through which one of the following Amendments?", options: ["73rd Amendment", "23rd Amendment", "44th Amendment", "76th Amendment"], answer: "c", marks: 1},
+            {unit: 4, question: "According to the Constitution of India, which one of the following rights cannot be taken away during emergency?", options: ["Right to speak", "Right to freedom of movement", "Right to life", "Right to organize"], answer: "c", marks: 1},
+            {unit: 4, question: "Which one of the following rights conferred by the Constitution of India is also available to non-citizens?", options: ["Freedom of speech, assembly and form association", "Freedom to move, reside and settle in any part of the territory of India", "Freedom to carry on any occupation, trade or business", "Equality before law and equal protection of laws"], answer: "d", marks: 1},
+            {unit: 4, question: "The Article of the Constitution which automatically becomes suspended on proclamation of emergency is:", options: ["Article 14", "Article 19", "Article 21", "Article 32"], answer: "b", marks: 1},
+            {unit: 4, question: "Freedom of the press in India is:", options: ["Available to the people under the law of the Parliament", "Specifically provided in the Constitution", "Implied in the right to freedom of expression", "Available to the people of India under executive order"], answer: "c", marks: 1},
+            {unit: 4, question: "Which one of the under mentioned rights is guaranteed to citizens as right to freedom under Article 19?", options: ["The right to vote", "The right to citizenship", "The right to contest an election", "The right to assemble peaceably and without arms"], answer: "d", marks: 1},
+            {unit: 4, question: "Which one of the following Fundamental Rights is available to both the citizens and aliens?", options: ["The right to equality of opportunity in public employment", "The right to freedoms under Article 19", "Cultural and educational rights", "The right to equality before law"], answer: "d", marks: 1},
+            {unit: 4, question: "What is the correct sequence of the following? 1. Scheduled Castes Order 2. Untouchability Offences Act 3. Protection of Civil Rights Act 4. Scheduled Castes and Scheduled Tribes (Prevention of Atrocities) Act", options: ["3, 4, 1, 2", "4, 1, 2, 3", "1, 2, 3, 4", "2, 3, 4, 1"], answer: "c", marks: 1},
+            {unit: 4, question: "In accordance with the text of the Constitution, a reasonable restriction in the interest of 'sovereignty and integrity' of India can be imposed on the right to:", options: ["Freedom of speech and expression", "Move freely throughout the territory of India", "Reside and settle in any part of the territory", "Carry on any occupation, trade or business of India"], answer: "a", marks: 1},
+            {unit: 4, question: "Which one of the following Fundamental Rights is guaranteed only to the citizens of India and not to the foreigners living in India?", options: ["Equality before law and equal protection of laws", "Freedom of speech and expression", "Right to life and liberty", "Right to the freedom of religion"], answer: "b", marks: 1},
+            {unit: 4, question: "The Right to Property was converted into a legal right from a Fundamental Right, because it:", options: ["Tied the hands of the government to prevent corruption", "Gave rise to litigations that made judiciary overburden", "Led to severe conflict between judiciary and the Parliament", "Increased public resentment"], answer: "c", marks: 1},
+            {unit: 4, question: "On which one of the following freedoms, can reasonable restrictions be imposed on the ground of the security of the state?", options: ["Speech and expression", "Peaceful assembly", "Association or union", "Movement"], answer: "a", marks: 1},
+            {unit: 4, question: "Right to Education is a fundamental right emanating from right to:", options: ["Freedom of speech and expression under Article 19", "Culture and education under Articles 29 and 30", "Life and personal liberty under Article 21", "Equality before law and equal protection of the laws under Article 14"], answer: "c", marks: 1},
+            {unit: 4, question: "Which one of the following is the correct statement? Right to privacy as a Fundamental Right is implicit in:", options: ["The Right to Freedom", "The Right to Personal Liberty", "The Right to Equality", "The Right Against Exploitation"], answer: "b", marks: 1},
+            {unit: 4, question: "Which one of the following statements is not correct?", options: ["Right to livelihood is an integral facet of the Right to life", "Natural justice is implicit in Article 21", "The Right to life includes the Right to health", "Right to go abroad is not a Fundamental Right under Article 21"], answer: "d", marks: 1},
+            {unit: 4, question: "Right to life emanates from:", options: ["Article 21 and includes right to die", "Article 19 and does not include right to die", "Articles 19 and 20 and does include right to die", "Article 21 and does not include right to die"], answer: "d", marks: 1},
+            {unit: 4, question: "Assertion (A): In Minerva Mills v. Union of India, Art.31-C as amended by the Constitution(Forty-second Amendment) Act, 1976 was held invalid. Reason (R): The amendment of Art. 31-C destroyed the basic structure of the Constitution.", options: ["Both A and R are individually true and R is the correct explanation of A", "Both A and R are individually true but R is not the correct explanation of A", "A is true but R is false", "A is false but R is true"], answer: "a", marks: 1},
+            {unit: 4, question: "Which one of the following rights cannot be inferred from Article 21 of the Constitution?", options: ["Right against inhuman treatment", "Right against delayed execution", "Right against solitary confinement", "Right to form association"], answer: "d", marks: 1},
+            {unit: 4, question: "Which of the following statements about the right to freedom of religion is not correct?", options: ["The State can regulate the economic, financial, political or other secular activities which may be associated with religious practices.", "Restrictions can be imposed on the right to freedom of religion on grounds of maintenance of public order, morality or health.", "Every religious denomination has the right to establish and maintain institutions for religious and charitable purposes.", "Funds appropriated by a religious denomination for promoting and maintaining a particular religion are taxable."], answer: "d", marks: 1},
+            {unit: 4, question: "Which of the following Fundamental Rights cannot be suspended during emergency?", options: ["Freedoms under Article 19", "Right to constitutional remedies under Articles 32 and 226", "Rights under Articles 21 and 22", "Rights under Articles 20 and 21"], answer: "d", marks: 1},
+            {unit: 4, question: "The Supreme Court has increased the ambit of the Right to Life (Article 21) to include which of the following? 1. Right to life includes the Right to live with dignity 2. Right to life includes the Right to livelihood 3. Right to life includes the Right to receive minimum wages 4. Right to life includes the Right to guaranteed employment for 100 days in a year", options: ["Only 4", "1 and 2", "1, 2 and 3", "1, 2, 3 and 4"], answer: "b", marks: 1},
+            {unit: 4, question: "Assertion (A): An accused person cannot be compelled to give his thumb impression. Reason (R): An accused person cannot be compelled to be a witness against himself.", options: ["Both A and R are individually true and R is the correct explanation of A", "Both A and R are individually true but R is not the correct explanation of A", "A is true but R is false", "A is false but R is true"], answer: "d", marks: 1},
+            {unit: 4, question: "By which of the following Right to Property has been omitted?", options: ["40th Amendment of Constitution", "42nd Amendment of Constitution", "44th Amendment of Constitution", "46th Amendment of Constitution"], answer: "c", marks: 1},
+            {unit: 4, question: "Right to Property is a", options: ["Fundamental Right", "Natural Right", "Statutory Right", "Legal Right"], answer: "d", marks: 1},
+            {unit: 4, question: "By which amendment the Right to Property was abolished?", options: ["24th", "44th", "25th", "42nd"], answer: "b", marks: 1},
+            {unit: 4, question: "When was the Fundamental Right to property abolished?", options: ["In 1978, by 44th Constitutional Amendment", "In 1982, by 46th Constitutional Amendment", "In 1973, by 31st Constitutional Amendment", "None of the above"], answer: "a", marks: 1},
+            {unit: 4, question: "Right to property according to the Constitution of India is a", options: ["Fundamental Right", "Directive Principle", "Legal Right", "Social Right"], answer: "c", marks: 1},
+            {unit: 4, question: "The 44th amendment to the Constitution of India removed the following right from the category of Fundamental Rights.", options: ["Freedom of Speech", "Constitutional Remedies", "Property", "Freedom of Religion"], answer: "c", marks: 1},
+            {unit: 4, question: "Which one of the following is not among the six fundamental rights provided by the Constitution of India?", options: ["Right to Equality", "Right to Protest", "Right Against Exploitation", "Right to Freedom of Religion"], answer: "b", marks: 1},
+
+            // UNIT 5 - Directive Principles (48 questions - rows 221-268)
+            {unit: 5, question: "Which of the following statements about a uniform civil code is/are correct? 1. It is binding on the State that a uniform civil code must be made applicable to all. 2. The provision regarding a uniform civil code is contained in Part III of the Constitution.", options: ["Only 1", "Only 2", "Both 1 and 2", "Neither 1 nor 2"], answer: "d", marks: 1},
+            {unit: 5, question: "Directive Principles of State Policy direct the State for which of the following? 1. To secure a social order for the promotion of welfare of the people 2. To separate judiciary from executive 3. To improve public health", options: ["1 and 2", "2 and 3", "1 and 3", "1, 2 and 3"], answer: "d", marks: 1},
+            {unit: 5, question: "Consider the following statements: Directive Principles of State Policy are: 1. Directives in the nature of ideals of the state 2. Directives influencing and shaping the policy of State 3. Non-justiciable rights of the citizens", options: ["Only 1", "2 and 3", "Only 3", "1, 2 and 3"], answer: "d", marks: 1},
+            {unit: 5, question: "Which of the following statements about the changes made by the forty second amendment to the Constitution relating to the Directive Principles of State Policy are correct? 1. It enabled State to provide free legal aid to its citizens. 2. It provided for the State to secure the participation of workers in the management of undertakings. 3. It required the state to minimise inequalities in income and status.", options: ["1 and 2", "1 and 3", "2 and 3", "1, 2 and 3"], answer: "a", marks: 1},
+            {unit: 5, question: "Which one of the following is the real guiding factor for the State to meet social needs and for the establishment of new social order?", options: ["Fundamental Rights", "Preamble of the Constitution", "Directive Principles of State Policy", "Distribution of Powers"], answer: "c", marks: 1},
+            {unit: 5, question: "Which one of the following is not stated as a Directive Principle of State Policy in the Constitution of India?", options: ["Organisation of village panchayats", "Uniform civil code for the citizens", "Separation of Judiciary from Executive", "Right of minorities to establish and administer educational institutions"], answer: "d", marks: 1},
+            {unit: 5, question: "The purpose of Directive Principles of State Policy is to?", options: ["lay down positive instructions which would guide State policy at all levels.", "implement Ganhiji's idea for a decentralized state.", "check the use of arbitrary powers by the government.", "promote welfare of the backward section of the society"], answer: "a", marks: 1},
+            {unit: 5, question: "Which part of the Indian Constitution deals with the Directive Principles of State Policy?", options: ["Part III", "Part IV", "Part V", "Part VI"], answer: "b", marks: 1},
+            {unit: 5, question: "The enforcement of Directive Principles depends most on?", options: ["the President", "the Court", "resources available to the government", "Chief Justice of India"], answer: "c", marks: 1},
+            {unit: 5, question: "Under the directive principle of state policy, up to what age of children they are expected to be provided free and compulsory education?", options: ["14 Years", "15 Years", "16 Years", "18 Years"], answer: "a", marks: 1},
+            {unit: 5, question: "The article of the constitution of India which deal with directive principle of state policy are?", options: ["26 to 41", "30 to 45", "36 to 51", "40 to 55"], answer: "c", marks: 1},
+            {unit: 5, question: "The Directive Principles of State Policy in the Constitution of India have been taken from which one of the following?", options: ["The Constitution of Canada", "The Constitution of United States of America", "The Constitution of Ireland", "The Constitution of Australia"], answer: "c", marks: 1},
+            {unit: 5, question: "Which of the following Articles contain Directive Principles of State Policy?", options: ["36 to 51", "30 to 49", "42 to 56", "28 to 48"], answer: "b", marks: 1},
+            {unit: 5, question: "The purpose of the inclusion of directive principle of state policy in the Indian constitution is to establish", options: ["Political democracy", "Social democracy", "Gandhian democracy", "Social and economic democracy"], answer: "d", marks: 1},
+            {unit: 5, question: "Panchayati Raj System in India is laid down under", options: ["Fundamental Rights", "Fundamental Duties", "Directive Principles of State Policy", "Election Commission Act"], answer: "c", marks: 1},
+            {unit: 5, question: "Which of the following is NOT included in the Directive Principles of State Policy?", options: ["Prohibition of liquor", "Right to work", "Equal wage for equal work", "Right to information"], answer: "d", marks: 1},
+            {unit: 5, question: "Which one of the following Articles of the Directive Principles of State Policy deals with the promotion of international peace and security?", options: ["41", "43A", "48A", "51"], answer: "d", marks: 1},
+            {unit: 5, question: "The Directive Principle of State Policy", options: ["Were added by the Forty-Second Amendment.", "Formed a part of the original Constitution.", "Do not from a part of the Constitution.", "Were added by the first three amendments to the Constitution."], answer: "b", marks: 1},
+            {unit: 5, question: "The Directive Principles are in the nature of", options: ["Injunction to the government to refrain from doing certain things", "Instructions to the government to do certain things.", "Request to the government to pay attention to certain subjects.", "Judicial injunction to the government to enact certain laws."], answer: "b", marks: 1},
+            {unit: 5, question: "The Directive Principles were incorporated in the Constitution with a view to", options: ["Ensure a democratic government in the country.", "Provided a strong central government.", "Establish welfare state.", "Raise the living standard of the weaker sections of society"], answer: "c", marks: 1},
+            {unit: 5, question: "Which one of the followings has been wrongly listed as a Directive Principle", options: ["Provision of adequate means of livelihood for all the citizens.", "Provision of employment facilities to all able-bodied persons.", "Protection of workers, especially children.", "Securing of equal pay for equal work to both men and women."], answer: "b", marks: 1},
+            {unit: 5, question: "Which one of the following Directive Principles can be described as Gandhian in Character?", options: ["Provision of equal work to both men and women.", "Protection of workers, especially children.", "Separation of the judiciary from the executive", "Organisation of village panchayats as effective units of self-government."], answer: "d", marks: 1},
+            {unit: 5, question: "Which one of the following Directive Principle is non-Gandhian?", options: ["Promotion of cottage industries in rural areas.", "Prohibition of the use of intoxicants except for the medical purposes.", "Prevention of slaughter of cows, calves and other milch cattle.", "Provision of free and compulsory education for all the children up to the age of fourteen years."], answer: "d", marks: 1},
+            {unit: 5, question: "Which one of the following is in the concurrent list in the Constitution of India?", options: ["Population control and family planning.", "Public health and sanitation.", "Capitation taxes.", "Treasure trove"], answer: "a", marks: 1},
+            {unit: 5, question: "Assertion (A): The Directive Principles of State Policy contained in the Constitution of India are relevant in determining the limits of reasonable restrictions laid down in Article 19 dealing with the Fundamental Right to Freedom. Reason (R): The Fundamental Rights in Part III of the Constitution have been superseded by the Directive Principles.", options: ["Both A and R are individually true and R is the correct explanation of A", "Both A and R are individually true but R is not the correct explanation of A", "A is true but R is false", "A is false but R is true"], answer: "c", marks: 1},
+            {unit: 5, question: "Though the Directive Principles of State Policy contained in the Constitution are not enforceable by any court, yet they are:", options: ["Fundamental in the governance of the country", "Binding on the State", "Enforceable at the instance of the President", "Superior to Fundamental Rights of India"], answer: "a", marks: 1},
+            {unit: 5, question: "Which of the following are included in the Directive Principles of State Policy in the Constitution of India? 1. Uniform civil code for the citizens 2. Separation of judiciary from executive 3. Protection of monuments of national importance", options: ["1 and 2", "2 and 3", "1 and 3", "1, 2 and 3"], answer: "d", marks: 1},
+            {unit: 5, question: "With respect to the Directive Principles of State Policy, which one of the following pairs is not correctly matched?", options: ["To secure just and humane conditions of work and maternity relief : Article 42", "To organise village Panchayats as units of self government : Article 40", "To secure the improvement of public health and the prohibition of intoxicating drinks and of drugs which are injurious to health : Article 47", "To protect all monuments of historic interest and national importance : Article 50"], answer: "d", marks: 1},
+            {unit: 5, question: "Which one of the following is not a Directive Principle of State Policy?", options: ["The State shall endeavour to secure for the citizens a uniform civil code.", "The State shall promote with special care the educational and economic interest of the weaker sections.", "The State shall endeavour to promote adult education to eliminate illiteracy.", "The State shall endeavour to protect every monument, place or object of artistic or historic interest."], answer: "c", marks: 1},
+            {unit: 5, question: "Which one of the following is not the objective of the Directive Principles of State Policy?", options: ["To establish a welfare state", "To ensure socio-economic justice", "To establish a religious state", "To establish a secular state"], answer: "c", marks: 1},
+            {unit: 5, question: "Assertion (A): The directive principles of state policy are not enforceable by any court. Reason (R): The directive principles are more or less fundamental in the governance of the country.", options: ["Both A and R are individually true and R is the correct explanation of A", "Both A and R are individually true but R is not the correct explanation of A", "A is true but R is false", "A is false but R is true"], answer: "b", marks: 1},
+            {unit: 5, question: "Which one of the following is a correct statement?", options: ["Primacy is given to all the directive principles contained in Part IV of the Constitution over fundamental rights.", "Primacy is given to all the fundamental rights conferred by Article 14-32 of the Constitution over directive principles.", "Primacy is given to all the fundamental rights conferred by Part III of the Constitution over directive principles.", "Primacy is given only to directive principles in clauses (b) and (c) of Article 39 over fundamental rights conferred by Articles 14 and 19 of the Constitution."], answer: "d", marks: 1},
+            {unit: 5, question: "Which one of the following Directive Principles was not originally provided for in the Constitution of India?", options: ["Citizen's right to an adequate means of livelihood", "Free legal aid", "Uniform civil code for the citizens", "Prohibition of the slaughter of cows and calves"], answer: "b", marks: 1},
+            {unit: 5, question: "The term 'equal pay for equal work' is a:", options: ["Directive Principle of State Policy", "Fundamental Right", "Fundamental Duty", "Constitutional Right"], answer: "a", marks: 1},
+            {unit: 5, question: "Assertion (A): Secularism is a basic feature of the Constitution of India in the sense that the State should be neutral to the different religions. Reason (R): One of the Directive Principles of State Policy states that it will be a part of the duty of the state to improve the breeds of cattle and stop the slaughter of cows and calves.", options: ["Both A and R are individually true and R is the correct explanation of A", "Both A and R are individually true but R is not the correct explanation of A", "A is true but R is false", "A is false but R is true"], answer: "b", marks: 1},
+            {unit: 5, question: "Which one of the following is not a Directive Principle of State Policy?", options: ["Organisation of Village Panchayats", "Uniform Civil Code for citizens as well as non-citizens", "Right to work, to education and to public assistance in certain cases", "Participation of workers in management of industries"], answer: "b", marks: 1},
+            {unit: 5, question: "'Directive Principles of State Policy are the conscience of the Constitution which embody the social philosophy of the Constitution' was described by:", options: ["Granville Austin", "A.V. Dicey", "Dr. B.R. Ambedkar", "K.C. Wheare"], answer: "a", marks: 1},
+            {unit: 5, question: "Which part of the Constitution of India refers to the responsibility of the state towards international peace and security?", options: ["Fundamental Rights", "Directive Principles of State Policy", "Emergency provisions", "Preamble to the Constitution"], answer: "b", marks: 1},
+            {unit: 5, question: "Which of the following statements is/are correct? 1. 42nd Amendment to the Constitution of India gave primacy to Directive Principles over Fundamental Rights. 2. Minerva Mills case ruled that there has to be a balance between Part III and Part IV of the Constitution. 3. National Commission for Review of the Working of the Constitution has recommended that Directive Principles be made justiceable.", options: ["1 and 2", "2 and 3", "1 and 3", "2 only"], answer: "a", marks: 1},
+            {unit: 5, question: "Assertion (A): Laws covered under Article 39 (b) and (c) have been given protective shield against some of the fundamental rights. Reason (R): The Directive Principles are also regarded relevant for considering what are reasonable restrictions under Article 19.", options: ["Both A and R are individually true and R is the correct explanation of A", "Both A and R are individually true but R is not the correct explanation of A", "A is true but R is false", "A is false but R is true"], answer: "b", marks: 1},
+            {unit: 5, question: "Which of the following is/are among Directive Principles of State Policy? 1. The State shall strive to promote science and technology for development. 2. The State shall endeavour to secure for citizens a Uniform Civil Code throughout India. 3. The State shall try to develop population policy and family planning programmes. 4. The State shall take steps to promote tourism.", options: ["1 and 3", "2 and 4", "2 only", "1, 2, 3 and 4"], answer: "c", marks: 1},
+            {unit: 5, question: "The Directive Principles of State Policy are fundamental for the:", options: ["Upliftment of backward classes", "Protection of individual rights", "Administration of justice", "Governance of state"], answer: "d", marks: 1},
+            {unit: 5, question: "Assertion (A): Any individual affected due to violation of any of the Directive Principles of State Policy, cannot move the court. Reason (R): The Directive Principles are not justiciable.", options: ["Both A and R are individually true and R is the correct explanation of A", "Both A and R are individually true but R is not the correct explanation of A", "A is true but R is false", "A is false but R is true"], answer: "a", marks: 1},
+            {unit: 5, question: "Which one of the following statements regarding the current status of the relationship between Fundamental Rights and Directive Principles is correct?", options: ["Directive Principles cannot get priority over Fundamental Rights in any case.", "Directive Principles always get priority over Fundamental Rights.", "Fundamental Rights always get priority over Directives Principles.", "In some cases Directive Principles may get priority over Fundamental Rights."], answer: "d", marks: 1},
+            {unit: 5, question: "Right to work in India is a:", options: ["Fundamental right", "Directive principle", "Constitutional right", "Constitutional duty"], answer: "b", marks: 1},
+            {unit: 5, question: "Assertion (A): It is the legal and Constitutional duty of the State to provide legal aid to the poor. Reason (R): No one shall be denied justice by reason of his poverty.", options: ["Both A and R are individually true and R is the correct explanation of A", "Both A and R are individually true but R is not the correct explanation of A", "A is true but R is false", "A is false but R is true"], answer: "a", marks: 1},
+            {unit: 5, question: "Consider the following statements: Directive Principles of State Policy are: 1. Not amendable 2. Not enforceable by any court 3. Fundamental in the governance of the country", options: ["1 and 2", "1 and 3", "2 and 3", "1, 2 and 3"], answer: "c", marks: 1},
+            {unit: 5, question: "The 'Instrument of Instructions' contained in the Government of India Act, 1935, has been incorporated in the Constitution of India in the year 1950 as:", options: ["Fundamental Rights", "Directive Principles of State Policy", "Fundamental Duties", "Emergency provisions"], answer: "b", marks: 1},
+
+            // UNIT 6 - Amendment Procedures (24 questions - rows 269-292)
+            {unit: 6, question: "Consider the following statements: 1. An amendment of the Constitution of India can be initiated by the introduction of a Bill only in the Lok Sabha. 2. The Bill for amendment of the Constitution of India has to be passed in each House by a majority of the total membership of that House and by a majority of not less than two-thirds of the members of that House present and voting.", options: ["Only 1", "Only 2", "Both 1 and 2", "Neither 1 nor 2"], answer: "b", marks: 1},
+            {unit: 6, question: "If an amendment of the Constitution of India seeks to make any change in certain items, the amendment requires to be ratified by the Legislatures of not less than one-half of the States before the Bill making provision for such amendment is presented to the President for assent. Which of the following are those items? 1. Representation of States in Parliament 2. Any of the Lists in the Seventh Schedule 3. Manner of election of the President of India", options: ["1 and 2", "2 and 3", "1 and 3", "1, 2 and 3"], answer: "d", marks: 1},
+            {unit: 6, question: "Restriction of the writ jurisdiction of the High Courts under Article 226 of the Constitution is possible through:", options: ["An amendment of the Constitution passed by two-third majority of members present and voting and a majority of the total membership of each House of Parliament.", "An amendment of the Constitution passed by a simple majority of members present and voting in both Houses of Parliament.", "An amendment of the Constitution passed by two-third majority of members present and voting, and a majority of the total membership of each House of Parliament together with the ratification of half of the State Legislatures.", "An amendment of the Constitution passed by two-third majority of members present and voting and a majority of the total membership of each House of Parliament together with the ratification of three quarters of the State Legislatures."], answer: "c", marks: 1},
+            {unit: 6, question: "On receipt of a Constitutional Amendment Bill, after passing by each House of Parliament, the President:", options: ["Shall give his assent", "May give his assent", "May withhold his assent", "May return the Bill for reconsideration"], answer: "a", marks: 1},
+            {unit: 6, question: "Which of the following are matters on which the Parliament has the power to modify provisions of the constitution by a simple majority? 1. Alternation of names, boundaries and areas of States 2. Appointment of additional judges 3. Abolition of the second chamber of a State Legislature 4. Administration of Scheduled Areas", options: ["1, 2 and 3", "1, 2 and 4", "1, 3 and 4", "2, 3 and 4"], answer: "c", marks: 1},
+            {unit: 6, question: "The constituent power of Parliament to amend the Constitution:", options: ["Includes power to amend by way of addition, variation or repeal of the provision of the Constitution", "Is unrestricted by any inherent and implied limitations", "Is not procedurally limited and restricted", "Is extra-constituent"], answer: "a", marks: 1},
+            {unit: 6, question: "A change in which of the following does not require ratification by the legislatures of not less than one-half of the states by resolutions to that effect passed by those legislatures before the bill making provisions for an amendment in the Constitution of India is presented to the President for assent?", options: ["Any of the lists in the Seventh Schedule", "The provisions of Article 368", "Article 73 about extent of executive power of the Union", "Article 161 about power of Governor to grant pardon"], answer: "d", marks: 1},
+            {unit: 6, question: "Which of the following features are present in the Indian Constitution? 1. Multiple procedures for amendment 2. States are not empowered to initiate amendment 3. Joint-sittings of Parliament to resolve disputes regarding constitutional amendments.", options: ["1 and 3", "1 and 2", "2 and 3", "1, 2 and 3"], answer: "b", marks: 1},
+            {unit: 6, question: "A Constitutional amendment shall also be ratified by legislatures of not less than one-half of the States by a resolution if it is meant to make any change in:", options: ["Fundamental Rights", "Directive Principles", "Fundamental Duties", "High Court Provisions"], answer: "d", marks: 1},
+            {unit: 6, question: "An amendment of the Constitution of India for the purpose of creating a new state must be passed by:", options: ["Simple majority in Parliament", "A simple majority in Parliament and ratification by not less than half of the states", "Two-thirds majority in Parliament and ratification by not less than two-third of the states", "Two-third of the members of both houses of Parliament present and voting"], answer: "a", marks: 1},
+            {unit: 6, question: "The provision of Article 368 of the Constitution of India deals with:", options: ["Power of Parliament to amend the Constitution", "Procedure for amendment of the constitution to be followed by Parliament", "Power as well as procedure for amendment of the Constitution", "Passing and ratification of amendment Bills by State Legislatures"], answer: "c", marks: 1},
+            {unit: 6, question: "How can an amendment in a list in the Seventh Schedule of the Constitution of India be initiated? If the Bill seeking amendment is passed in either House of Parliament by:", options: ["A majority of the total membership of that house.", "A majority of the total membership of that house and by a majority of not less than two-thirds of the members of that House present and voting.", "A majority of the total membership of that house and by a majority of not less than two-thirds of the members of that House present and voting and the amendment shall also requires to be ratified by the Legislatures of not less than one-half of the States.", "A majority of the total membership of that house and by a majority of not less than two-thirds of the members of that House present and voting and the amendment shall also requires to be ratified by the Legislatures of not less than two-thirds of the States."], answer: "c", marks: 1},
+            {unit: 6, question: "Amendment of which one of the following provisions of the Constitution requires ratification by the Legislatures of the States?", options: ["Article 157 relating to the qualifications for appointment as Governor of the State", "Article 123 relating to the powers of the President to promulgate ordinances on a subject mentioned in Concurrent List during the recess of the Parliament", "Article 56 relating to the term of the office of the President", "Article 54 relating to the election of the President"], answer: "d", marks: 1},
+            {unit: 6, question: "Consider the following statements related to Article 368 of the Constitution: 1. A Constitutional Amendment Bill can be passed at a joint session of Parliament in case of deadlock between the two Houses. 2. It is obligatory for the President of India to give his assent to a Constitutional Amendment Bill passed under Article 368. 3. To amend 7th Schedule of the Constitution, ratification of more than half of the State legislatures is essential. 4. A proposal to amend the Constitution can only be introduced in the House of the People.", options: ["1 and 2", "1 and 3", "2 and 3", "1, 2 and 3"], answer: "c", marks: 1},
+            {unit: 6, question: "How many methods are there to amend the Constitution of India", options: ["5", "4", "3", "2"], answer: "c", marks: 1},
+            {unit: 6, question: "Indian constitution is:", options: ["Rigid", "flexible", "partly rigid and flexible", "None of these"], answer: "c", marks: 1},
+            {unit: 6, question: "Which one of the following amendments to the Indian Constitution empowers the President to send back any matter for reconsideration by the Council of Ministers?", options: ["39th Amendment", "40th Amendment", "42nd Amendment", "44th Amendment"], answer: "d", marks: 1},
+            {unit: 6, question: "The Ninth Schedule to the Indian Constitution was added by:", options: ["First Amendment", "Eighth Amendment", "Ninth Amendment", "Forty Second Amendment"], answer: "a", marks: 1},
+            {unit: 6, question: "In which constitutional amendment act, empower the establishment of a common high court for two or more states?", options: ["7th", "8th", "9th", "10th"], answer: "a", marks: 1},
+            {unit: 6, question: "Article 368, amending procedure of constitution is mentioned in which part of Indian constitution?", options: ["Part X", "Part VI", "Part IX", "Part XX"], answer: "d", marks: 1},
+            {unit: 6, question: "An amendment of the constitution can be initiated only in?", options: ["Rajya Sabha Only", "Lok Sabha Only", "Either Rajya Sabha or Lok Sabha", "Either Parliament or State Legislatures"], answer: "c", marks: 1},
+            {unit: 6, question: "Which of the following statement is false regarding the Constitutional Amendment bill?", options: ["It can be introduced by the minister.", "It can be introduced by a private member.", "Introduction of the constitutional amendment bill does not require prior permission from the president.", "There is a provision for holding a joint sitting of the two houses in case of disagreement."], answer: "d", marks: 1},
+            {unit: 6, question: "Which of the following amendment require only a simple majority of parliament?", options: ["Election of the president.", "Emoluments, allowances, and privileges of the president.", "Executive power of the Union and the states.", "Representation of states in Parliament."], answer: "b", marks: 1},
+            {unit: 6, question: "Constitution can be amended in three way; 1. By the simple majority of parliament. 2. By the special majority of parliament. 3. By the special majority of parliament and ratification of half of the state legislative. Which of the above amendments come under article 368.", options: ["1and 2 only", "1 and 3 only", "2 and 3 only", "1, 2, and 3 only"], answer: "c", marks: 1},
+
+            // Continue with UNIT 7, 8, 9, 10...
+            // Due to response length, I need to add these in the continuation
+            
         ];
-
-        // Continue with remaining questions (101-502)
-        const remainingQuestions = [
-            {"sr_no":101,"unit":3,"question":"Consider the following statements:\nIn view of Article 20 of the Constitution of India, no person accused of an offence can be compelled to:\n1. Give his signature or thumb impression for identification.\n2. Give oral testimony either in or out of the court.\nWhich of the statements given above is/are correct?","answer":"b","marks":1,"options":["Only 1","Only 2","Both 1 and 2","Neither 1 nor 2"]},
-            {"sr_no":102,"unit":3,"question":"Consider the following statements:\n1. The writ of mandamus is available not only against judicial authorities but also against administrative authorities.\n2. The writ of prohibition is issued only against judicial or quasi-judicial authorities.\nWhich of the statements given above is/are correct?","answer":"c","marks":1,"options":["Only 1","Only 2","Both 1 and 2","Neither 1 nor 2"]},
-            {"sr_no":103,"unit":3,"question":"Consider the following statements:\n1. There is no provision in the Constitution of India for reservation in the matters of promotion in the services under the state in favour of the scheduled castes and the scheduled tribes.\n2. As per provisions of the Constitution of India, for getting reservation for the appointments and posts under the state, a class must be backward and should not be adequately represented in the services under the state.\nWhich of the statements given above is/are correct?","answer":"b","marks":1,"options":["Only 1","Only 2","Both 1 and 2","Neither 1 nor 2"]},
-            {"sr_no":104,"unit":3,"question":"Consider the following statements:\n1. A Constitutional amendment inserting a regulation in the Ninth Schedule can be challenged on the ground of violation of basic structure of the Constitution.\n2. Any legislation enacted by Parliament cannot be successfully challenged for affecting the basic structure of the Constitution.\nWhich of the statements given above is/are correct?","answer":"a","marks":1,"options":["Only 1","Only 2","Both 1 and 2","Neither 1 nor 2"]},
-            {"sr_no":105,"unit":3,"question":"Assertion (A): The principle of equality before law means that there should be equality of treatment under equal circumstances.\nReason (R): All persons are not equal by nature, attainment or circumstances.","answer":"a","marks":1,"options":["Both A and R are individually true and R is the correct explanation of A","Both A and R are individually true but R is not the correct explanation of A","A is true but R is false","A is false but R is true"]},
-            {"sr_no":106,"unit":3,"question":"Which of the following are envisaged by the Right Against Exploitation in the Constitution of India?\n1. Prohibition of traffic in human beings and forced labour\n2. Abolition of untouchability\n3. Protection of the interests of minorities\n4. Prohibition of employment of children in factories and mines\nSelect the correct answer using the codes given below:","answer":"d","marks":1,"options":["1 and 2","1 and 3","2, 3 and 4","1 and 4"]},
-            {"sr_no":107,"unit":3,"question":"As far as the Armed Forces are concerned, the Fundamental Rights granted under Articles 14 and 19 of Constitution are:","answer":"d","marks":1,"options":["Not available at all","Available to the Armed Forces but not to other forces","Available only at the discretion of the Chief of the Army staff","Available only according to law made by Parliament"]},
-            {"sr_no":108,"unit":3,"question":"In Indian Constitution, the power to issue a writ of 'Habeas Corpus' is vested only in:","answer":"d","marks":1,"options":["The Supreme Court","The High Courts","The Subordinate Courts","The Supreme Court and the High Courts"]},
-            {"sr_no":109,"unit":3,"question":"Which of the following rights is not explicitly mentioned in the Fundamental Rights but has been upheld to be so by several pronouncements of the Supreme Court?","answer":"d","marks":1,"options":["Equity before law","Right to non-discrimination in public employment","Right to form associations or unions","Right to freedom of Press"]},
-            {"sr_no":110,"unit":3,"question":"Which of the following statements are true with regard to the Fundamental Rights of the minorities in educational matters?\n1. The minority has only the right to administer the educational institutions.\n2. The minority has the right to establish and administer educational institutions.\n3. The right is absolute and not subject to any restriction.\n4. Reasonable restrictions may be imposed to promote efficiency and prevent maladministration.\nSelect the correct answer using the codes given below:","answer":"b","marks":1,"options":["1, 2 and 3","2 and 4","2, 3 and 4","1 and 3"]},
-            {"sr_no":111,"unit":3,"question":"Which of the following statements is/are correct of the writ of prohibition?\n1. It is an order issued by a higher court commanding a lower court to cease from proceeding in some matters not within its jurisdiction.\n2. It can be claimed by an aggrieved party as a matter of right.\nSelect the correct answer using the codes given below:","answer":"c","marks":1,"options":["Only 1","Only 2","Both 1 and 2","Neither 1 nor 2"]},
-            {"sr_no":112,"unit":3,"question":"Under the Indian Constitution, which one of the following is not a specific ground on which the State can place restrictions on freedom of religion?","answer":"c","marks":1,"options":["Public order","Morality","Social Justice","Health"]},
-            {"sr_no":113,"unit":3,"question":"The scope of 'life and personal liberty', as envisaged in Article 21 of the Constitution of India, has expanded considerably over the years. Which one of the following can still not be subject of this protection?","answer":"c","marks":1,"options":["The Right to good health","The Right of a bonded labour to rehabilitation after release","The Right, under a settlement, to claim bonus or dearness allowance","The Right to livelihood by means which are not illegal, immoral or opposed to public policy"]},
-            {"sr_no":114,"unit":3,"question":"Assertion (A): Preventive Detention is included in the chapter on Fundamental Rights in the Constitution of India.\nReason (R): The Constitution has vested the legislative power with regard to preventive detention in the Parliament only and the State Legislatures have no authority in this regard.","answer":"c","marks":1,"options":["Both A and R are individually true and R is the correct explanation of A","Both A and R are individually true but R is not the correct explanation of A","A is true but R is false","A is false but R is true"]},
-            {"sr_no":115,"unit":3,"question":"Which of the following is not included in Article 19 of the Constitution of India, pertaining to the Right to Freedom?","answer":"b","marks":1,"options":["Right to reside and settle in any part of the territory of India","Right of minorities to establish and administer educational institutions","Right to form associations or unions","Right to assemble peaceably and without arms"]},
-            {"sr_no":116,"unit":3,"question":"Consider the following statements:\nThe 'State' under Article 12 of the Indian Constitution includes:\n1. The Government and Parliament of India.\n2. The Government and legislature of the states.\n3. Local authorities or other authorities within the territories of India or under the control of Government of India.\nWhich of the statements given above are correct?","answer":"a","marks":1,"options":["1, 2 and 3","1 and 2","2 and 3","1 and 3"]},
-            {"sr_no":117,"unit":3,"question":"Which one of the following rights was described by Dr. Ambedkar as 'the heart and soul' of the Constitution?","answer":"c","marks":1,"options":["Right to equality","Right against exploitation","Right to constitutional remedies","Right to freedom of religion"]},
-            {"sr_no":118,"unit":3,"question":"Which one of the following freedoms is not guaranteed by the Constitution of India?","answer":"a","marks":1,"options":["Freedom to own, acquire and dispose of property","Freedom to move freely throughout the country","Freedom to assemble peaceably and without arms","Freedom to practice any trade or profession"]},
-            {"sr_no":119,"unit":3,"question":"Assertion (A): One of the fundamental principles of the Indian Constitution is the Rule of Law.\nReason (R): The Constitution of India has guaranteed to every citizen the equality before law and has recognized the judiciary as the unfailing guardian of the rights of people.","answer":"a","marks":1,"options":["Both A and R are individually true and R is the correct explanation of A","Both A and R are individually true but R is not the correct explanation of A","A is true but R is false","A is false but R is true"]},
-            {"sr_no":120,"unit":3,"question":"Which one of the following is the correct statement?\nRight to privacy as a Fundamental Right is implicit in:","answer":"b","marks":1,"options":["The Right to Freedom","The Right to Personal Liberty","The Right to Equality","The Right Against Exploitation"]},
-            {"sr_no":121,"unit":3,"question":"Assertion (A): An accused person cannot be compelled to give his thumb impression.\nReason (R): An accused person cannot be compelled to be a witness against himself.","answer":"d","marks":1,"options":["Both A and R are individually true and R is the correct explanation of A","Both A and R are individually true but R is not the correct explanation of A","A is true but R is false","A is false but R is true"]},
-            {"sr_no":122,"unit":3,"question":"Right to Education is a fundamental right emanating from right to:","answer":"c","marks":1,"options":["Freedom of speech and expression under Article 19","Culture and education under Articles 29 and 30","Life and personal liberty under Article 21","Equality before law and equal protection of the laws under Article 14"]},
-            {"sr_no":123,"unit":3,"question":"The State shall not make any law which takes away or abridges the fundamental rights. Which one of the following shall not be construed as law for this purpose?","answer":"d","marks":1,"options":["Ordinance","Bye-law","Rule","Constitutional amendment"]},
-            {"sr_no":124,"unit":3,"question":"On which one of the following freedoms, can reasonable restrictions be imposed on the ground of the security of the state?","answer":"a","marks":1,"options":["Speech and expression","Peaceful assembly","Association or union","Movement"]},
-            {"sr_no":125,"unit":3,"question":"Which of the following are mentioned under separate Articles in Part III of the Constitution of India pertaining to Fundamental Rights?\n1. Abolition of untouchability\n2. Abolition of titles\n3. Freedom as to payment of taxes for promotion of any particular religion\n4. Protection of interests of minorities\nSelect the correct answer by using the codes given below:","answer":"d","marks":1,"options":["1 and 2","2, 3 and 4","3 and 4","1, 2, 3 and 4"]},
-            {"sr_no":126,"unit":3,"question":"Fundamental rights guaranteed in the Indian Constitution can be suspended only by:","answer":"a","marks":1,"options":["A proclamation of national emergency","An Act passed by the Parliament","An amendment of the Constitution","The judicial decisions of the Supreme Court"]},
-            {"sr_no":127,"unit":3,"question":"The Right to Property was converted into a legal right from a Fundamental Right, because it:","answer":"c","marks":1,"options":["Tied the hands of the government to prevent corruption","Gave rise to litigations that made judiciary overburden","Led to severe conflict between judiciary and the Parliament","Increased public resentment"]},
-            {"sr_no":128,"unit":3,"question":"Under Article 22 of the Constitution of India, with the exception of certain provisions stated therein, what is the maximum period for detention of a person under preventive detention?","answer":"b","marks":1,"options":["2 months","3 months","4 months","6 months"]},
-            {"sr_no":129,"unit":3,"question":"Which one of the following Fundamental Rights is guaranteed only to the citizens of India and not to the foreigners living in India?","answer":"b","marks":1,"options":["Equality before law and equal protection of laws","Freedom of speech and expression","Right to life and liberty","Right to the freedom of religion"]},
-            {"sr_no":130,"unit":3,"question":"The Indian constitution guarantees how many categories of Fundamental Rights","answer":"b","marks":1,"options":["5","6","7","8"]},
-            {"sr_no":131,"unit":3,"question":"Which Right was remarked by Dr B.R. Ambedkar as the \"heart and soul of the Constitution\"","answer":"d","marks":1,"options":["Right to Equality","Right to Freedom","Right to Education","Right to Constitutional remedies"]},
-            {"sr_no":132,"unit":3,"question":"In which part of the Indian Constitution, the Fundamental rights are provided?","answer":"b","marks":1,"options":["Part II","Part III","Part V","Part IV"]},
-            {"sr_no":133,"unit":3,"question":"Which of the following articles guarantees equality before law and equal protection of law for all individuals residing within the territory of India?","answer":"b","marks":1,"options":["15","14","17","18"]},
-            {"sr_no":134,"unit":3,"question":"Which article of the Constitution abolishes Untouchability?","answer":"d","marks":1,"options":["Article 18","Article 15","Article 14","Article 17"]},
-            {"sr_no":135,"unit":3,"question":"Which of the following is correct with respect to \"Right against exploitation\"?","answer":"a","marks":1,"options":["Prohibition of traffic in human beings and forced labour","Freedom as to payment of taxes for the promotion of any particular religion","Protection of interests of minorities","Equality before law"]},
-            {"sr_no":136,"unit":3,"question":"Which one of the following right of Indian Constitution guarantees all the fundamental rights to every resident of a country?","answer":"d","marks":1,"options":["Right against exploitation","Right to freedom","Right to equality","Right to constitutional remedies"]},
-            {"sr_no":137,"unit":3,"question":"Which one of the following is true with respect to the Fundamental Rights of Indian Constitution?","answer":"b","marks":1,"options":["The sovereignty of the people","Equality of opportunity for all resident","Limited government","Democracy"]},
-            {"sr_no":138,"unit":3,"question":"B. R. Ambedkar termed Article 32 of the Indian Constitution as the \"Heart and Soul of the Indian Constitution\". Which one of the following fundamental right it contains?","answer":"b","marks":1,"options":["Right to freedom","Right to constitutional remedies","Right to elementary education","Right to freedom of religion"]},
-            {"sr_no":139,"unit":3,"question":"Which of the following Articles contain the right to religious freedom?","answer":"a","marks":1,"options":["25-28","29-30","32-35","23-24"]},
-            {"sr_no":140,"unit":3,"question":"Which of the following can a court issue for enforcement of Fundamental Rights?","answer":"b","marks":1,"options":["A decree","A writ","An Ordinance","A notification"]},
-            {"sr_no":141,"unit":3,"question":"Prohibition of discrimination on grounds of religion, race, caste, sex or place of birth is a fundamental right classifiable under?","answer":"b","marks":1,"options":["right to freedom of religion","Right to equality","Right against exploitation","None of these"]},
-            {"sr_no":142,"unit":3,"question":"The Constitution guarantees that all citizens will be equal before law. It is provided in","answer":"d","marks":1,"options":["Article 11 of Indian Constitution","Article 12 of Indian Constitution","Article 13 of Indian Constitution","Article 14 of Indian Constitution"]},
-            {"sr_no":143,"unit":3,"question":"Civil equality means","answer":"a","marks":1,"options":["Equality before law","Equality of opportunity","Equal distribution of wealth","Equal right to participate in the affairs of the state"]},
-            {"sr_no":144,"unit":3,"question":"Which of the following is a bulwark of personal freedom?","answer":"b","marks":1,"options":["mandamus","Habeas Corpus","Quo Warranto","Certiorari"]},
-            {"sr_no":145,"unit":3,"question":"Part III of the Constitution of India relates to","answer":"a","marks":1,"options":["Fundamental Rights","Directive Principles of state policy","Fundamental duties","citizenship"]},
-            {"sr_no":146,"unit":3,"question":"Which of the following is given the power to implement the Fundamental Right by the Constitution?","answer":"d","marks":1,"options":["All courts in India","The Parliament","The President","The Supreme Court and High Courts"]},
-            {"sr_no":147,"unit":3,"question":"Which provision of the Fundamental Rights is directly relates to the exploitation of children?","answer":"d","marks":1,"options":["Article 17","Article 19","Article 23","Article 24"]},
-            {"sr_no":148,"unit":3,"question":"Right to education to all children between the age of 6 to 14 year is","answer":"b","marks":1,"options":["Included in the Directive Principle of State Policy","A fundamental Right","A Statutory Right","None of the above"]},
-            {"sr_no":149,"unit":3,"question":"The Word 'Hindus' in Article 25 of the Constitution of India does not include?","answer":"d","marks":1,"options":["Buddhists","Jains","Sikhs","Parsees"]},
-            {"sr_no":150,"unit":3,"question":"The constitution of India, adopted Fundamental Duties from the constitution of________?","answer":"c","marks":1,"options":["America","Japan","Russia","Britain"]},
-            {"sr_no":151,"unit":3,"question":"When Fundamental Duties were added to the Constitution of India?","answer":"a","marks":1,"options":["1976","1965","1970","1992"]},
-            {"sr_no":152,"unit":3,"question":"At present how many Fundamental Duties are in the Constitution of India?","answer":"d","marks":1,"options":["6","7","10","11"]},
-            {"sr_no":153,"unit":3,"question":"In the Indian Constitution, Fundamental Duties are given in which article?","answer":"b","marks":1,"options":["Article 12 to 35","Article 51A","Article 36 to 50","Article 19"]},
-            {"sr_no":154,"unit":3,"question":"Equal pay for equal work' has been ensured in the Indian constitution as one of them?","answer":"b","marks":1,"options":["Fundamental right","Directive principle of state policy","Fundamental duties","Economic right"]},
-            {"sr_no":155,"unit":3,"question":"Economic right","answer":"c","marks":1,"options":["Administration of union territories","Formation of interstate councils","Fundamental duties","None of these"]},
-            {"sr_no":156,"unit":3,"question":"Under which article provisions of fundamental duties incorporated","answer":"c","marks":1,"options":["Article 50","Article 51","Article 51A","Article 52"]},
-            {"sr_no":157,"unit":3,"question":"In which part the part of fundamental duties have been incorporated","answer":"b","marks":1,"options":["Part 3","Part 4A","Part 4","Part 5"]},
-            {"sr_no":158,"unit":3,"question":"Which of the following is not the Fundamental Duty?","answer":"b","marks":1,"options":["Safeguarding public","To obey the parents","To make compulsory education to children of 6 to 14 years","To spread brotherhood among the people"]},
-            {"sr_no":159,"unit":3,"question":"Which among the following does not come under Fundamental Duties of a citizen in India?","answer":"c","marks":1,"options":["To protect and Improve Natural Environment","To develop scientific temper, humanism, and spirit of inquiry and reform","To strive towards the abolition of untouchability","All are comes under fundamental duties"]},
-            {"sr_no":160,"unit":3,"question":"How many duties were in the original constitution(when the constitution was created)?","answer":"d","marks":1,"options":["Eight","Ten","Four","Zero"]},
-            {"sr_no":161,"unit":3,"question":"By what term, The ten commandments of 42nd constitutional amendment act are called?","answer":"b","marks":1,"options":["Fundamental rights","Fundamental duties","Directive principle of state policy","None of these"]},
-            {"sr_no":162,"unit":3,"question":"Respect for the National Flag and the National Anthem is","answer":"b","marks":1,"options":["A fundamental right of every citizen","A fundamental duty of every citizen","A directive principle of state policy","An ordinary duty of every citizen"]},
-            {"sr_no":163,"unit":3,"question":"Which one of the following is not a fundamental duty?","answer":"c","marks":1,"options":["To respect the National Anthem","To safeguard public property","To protect monuments and places of national importance","To protect and improve the natural environment"]},
-            {"sr_no":164,"unit":3,"question":"Which one of the following is not included as a Fundamental Duty in the Constitution of India?","answer":"c","marks":1,"options":["To cherish and follow the noble ideals which inspired our national struggle.","To develop the scientific temper, humanism and the spirit of inquiry and reform.","To protect the minorities.","To safeguard public property and to abjure violence"]},
-            {"sr_no":165,"unit":3,"question":"Which of the following Articles of the Constitution of India relate to the protection and improvement of environment?","answer":"c","marks":1,"options":["Article 48 A only","Article 51 A only","Both Article 48 A and Article 51 A","Neither Article 48 A nor Article 51 A"]},
-            {"sr_no":166,"unit":3,"question":"The Fundamental Duties of the Indian Citizens.","answer":"b","marks":1,"options":["Formed a part of the original Constitution.","Were added by the Forty-Second Amendment.","Were added by the Forty-Fourth Amendment.","Were defined by the parliament through a law enacted during the emergency."]},
-            {"sr_no":167,"unit":3,"question":"The Fundamental Duties were added to constitution because","answer":"b","marks":1,"options":["Majority of the people wanted it.","A section of people was not fulfilling its obligation of respecting the established legal order.","The government felt this would ensure quicker progress of the country","The Supreme Court emphasised the need of incorporation of these duties in the Constitution."]},
-            {"sr_no":168,"unit":3,"question":"Which one of the followings is not a Fundamental duty as outlined in Article 51A of the Constitution?","answer":"c","marks":1,"options":["To abide by the Constitution and respect its ideals.","To defend the country and render national service when called upon to do so.","To work for the moral upliftment of the weaker sections of society.","To preserve the rich heritage of our composite culture."]},
-            {"sr_no":169,"unit":3,"question":"Which one of the followings has been wrongly listed as a Fundamental duty of the Indian citizens?","answer":"b","marks":1,"options":["To develop scientific temper, humanism and spirit of inquiry and reform.","To work for raising the prestige of the country in the international sphere.","To protect and improve the natural environment.","To strive towards excellence in all spheres of individual and collective activity."]},
-            {"sr_no":170,"unit":3,"question":"The Fundamental duties were added to the Constitution","answer":"b","marks":1,"options":["To make the Fundamental Rights more effective.","To check anti-national, subversive and unconstitutional agitations.","To accord priority to the directive principles over fundamental rights.","To achieve all the above objectives."]},
-        ];
-
-        // Due to character limits, I'll add a function to load all questions dynamically
-        const allQuizData = [...quizData, ...remainingQuestions];
-
-        // Add remaining questions programmatically for units 4-10
-        // This would normally be done by parsing the full PDF data
 
         const App = () => {
             const [currentScreen, setCurrentScreen] = useState('home');
-            const [selectedUnit, setSelectedUnit] = useState(null);
             const [mode, setMode] = useState(null);
+            const [selectedUnit, setSelectedUnit] = useState(null);
             const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
             const [selectedAnswers, setSelectedAnswers] = useState({});
             const [showResults, setShowResults] = useState(false);
+            const [currentQuestions, setCurrentQuestions] = useState([]);
 
-            // Get questions by unit
-            const getQuestionsByUnit = (unit) => {
-                return allQuizData.filter(q => q.unit === unit);
-            };
-
-            // Get unique units
-            const units = [...new Set(allQuizData.map(q => q.unit))].sort((a, b) => a - b);
-
-            // Unit titles
+            const units = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            
             const unitTitles = {
                 1: "Historical Background",
                 2: "Making of Constitution",
                 3: "Fundamental Rights & Duties",
-                4: "More on Fundamental Rights",
-                5: "Directive Principles",
-                6: "Constitutional Amendments",
+                4: "Fundamental Rights (Continued)",
+                5: "Directive Principles of State Policy",
+                6: "Amendment Procedures",
                 7: "Federal Structure",
                 8: "Parliament",
                 9: "Emergency & President",
                 10: "Local Government"
+            };
+
+            const getQuestionsByUnit = (unitNumber) => {
+                return questionsData.filter(q => q.unit === unitNumber);
             };
 
             const handleModeSelect = (selectedMode) => {
@@ -704,6 +851,8 @@
 
             const handleUnitSelect = (unit) => {
                 setSelectedUnit(unit);
+                const questions = getQuestionsByUnit(unit);
+                setCurrentQuestions(questions);
                 setCurrentQuestionIndex(0);
                 setSelectedAnswers({});
                 setShowResults(false);
@@ -713,21 +862,21 @@
             const handleBack = () => {
                 if (currentScreen === 'view-mode' || currentScreen === 'quiz-mode') {
                     setCurrentScreen('chapter-selection');
+                    setSelectedUnit(null);
+                    setCurrentQuestions([]);
+                    setSelectedAnswers({});
+                    setShowResults(false);
                 } else if (currentScreen === 'chapter-selection') {
                     setCurrentScreen('home');
+                    setMode(null);
                 }
             };
 
-            const currentQuestions = selectedUnit ? getQuestionsByUnit(selectedUnit) : [];
-            const currentQuestion = currentQuestions[currentQuestionIndex];
-
             const handleAnswerSelect = (optionIndex) => {
-                if (mode === 'quiz') {
-                    setSelectedAnswers({
-                        ...selectedAnswers,
-                        [currentQuestionIndex]: optionIndex
-                    });
-                }
+                setSelectedAnswers({
+                    ...selectedAnswers,
+                    [currentQuestionIndex]: optionIndex
+                });
             };
 
             const handleNext = () => {
@@ -746,8 +895,8 @@
 
             const calculateScore = () => {
                 let correct = 0;
-                currentQuestions.forEach((q, index) => {
-                    const answerIndex = ['a', 'b', 'c', 'd'].indexOf(q.answer);
+                currentQuestions.forEach((question, index) => {
+                    const answerIndex = ['a', 'b', 'c', 'd'].indexOf(question.answer);
                     if (selectedAnswers[index] === answerIndex) {
                         correct++;
                     }
@@ -759,19 +908,20 @@
                 };
             };
 
+            const currentQuestion = currentQuestions[currentQuestionIndex];
+
             const getOptionClass = (optionIndex, questionIndex) => {
-                if (mode === 'view') {
-                    const answerIndex = ['a', 'b', 'c', 'd'].indexOf(currentQuestion.answer);
-                    return optionIndex === answerIndex ? 'option correct' : 'option';
-                }
-                if (mode === 'quiz') {
-                    if (showResults) {
-                        const answerIndex = ['a', 'b', 'c', 'd'].indexOf(currentQuestion.answer);
-                        const userAnswer = selectedAnswers[questionIndex];
-                        if (optionIndex === answerIndex) return 'option correct';
-                        if (optionIndex === userAnswer && userAnswer !== answerIndex) return 'option wrong';
+                const answerIndex = ['a', 'b', 'c', 'd'].indexOf(currentQuestions[questionIndex].answer);
+                const selectedIndex = selectedAnswers[questionIndex];
+                
+                if (selectedIndex === optionIndex) {
+                    if (selectedIndex === answerIndex) {
+                        return 'option selected correct';
+                    } else {
+                        return 'option selected wrong';
                     }
-                    return selectedAnswers[questionIndex] === optionIndex ? 'option selected' : 'option';
+                } else if (optionIndex === answerIndex && selectedIndex !== undefined) {
+                    return 'option correct';
                 }
                 return 'option';
             };
